@@ -1,7 +1,7 @@
 let contextMenuActions = {
     searchSelectionText: (url) => {
-        return (clickData) => {
-            let selectionText = clickData.selectionText;
+        return (onClickData) => {
+            let selectionText = onClickData.selectionText;
             let openUrl = url.replace(ContextMenuSearchTerm, selectionText);
             chrome.tabs.create(
                 {
@@ -10,10 +10,9 @@ let contextMenuActions = {
             );
         }
     },
-
     searchPage: (url) => {
-        return (clickData) => {
-            let pageUrl = clickData.pageUrl;
+        return (onClickData) => {
+            let pageUrl = onClickData.pageUrl;
             let openUrl = pageUrl;
             if (url) {
                 openUrl = url.replace(ContextMenuSearchTerm, pageUrl);
@@ -25,10 +24,9 @@ let contextMenuActions = {
             )
         }
     },
-
     searchLink: (url) => {
-        return (clickData) => {
-            let linkUrl = clickData.linkUrl;
+        return (onClickData) => {
+            let linkUrl = onClickData.linkUrl;
             let openUrl = linkUrl;
             if (url) {
                 openUrl = url.replace(ContextMenuSearchTerm, linkUrl);
@@ -40,10 +38,9 @@ let contextMenuActions = {
             )
         }
     },
-
     searchImage: (url) => {
-        return (clickData) => {
-            let imageUrl = clickData.srcUrl; 
+        return (onClickData) => {
+            let imageUrl = onClickData.srcUrl; 
             let openUrl = imageUrl;
             if (url) {
                 openUrl = url.replace(ContextMenuSearchTerm, imageUrl);
@@ -55,10 +52,9 @@ let contextMenuActions = {
             );
         }
     },
-
     searchFrame: (url) => {
-        return (clickData) => {
-            let frameUrl = clickData.frameUrl; 
+        return (onClickData) => {
+            let frameUrl = onClickData.frameUrl; 
             let openUrl = frameUrl;
             if (url) {
                 openUrl = url.replace(ContextMenuSearchTerm, frameUrl);
@@ -68,6 +64,79 @@ let contextMenuActions = {
                     url: openUrl
                 }
             );
+        }
+    },
+
+
+    copyBase64Image: (url) => {
+        return (onClickData) => {
+            let tempImage = new Image;
+            tempImage.src = onClickData.srcUrl;
+            tempImage.onload = () =>
+            {
+                canvas.width = tempImage.width;
+                canvas.height = tempImage.height;
+                
+                context = canvas.getContext('2d');
+                context.drawImage(tempImage, 0, 0);
+        
+                tempContainer.textContent = canvas.toDataURL();
+                document.body.appendChild(tempContainer);
+                tempContainer.select();
+        
+                chrome.extension.getBackgroundPage().console.log(tempContainer.textContent);
+                document.execCommand('copy');
+                document.body.removeChild(tempContainer);
+            }
+        }
+    },
+    openBase64Image: (url) => {
+        return (onClickData) => {
+            let tempImage = new Image;
+            tempImage.src = onClickData.srcUrl;
+            tempImage.onload = () =>
+            {
+                canvas.width = tempImage.width;
+                canvas.height = tempImage.height;
+                
+                context = canvas.getContext('2d');
+                context.drawImage(tempImage, 0, 0);
+        
+                let base64Url = canvas.toDataURL();
+
+                chrome.tabs.create(
+                    {
+                        url: base64Url
+                    }
+                );
+            }
+        }
+    },
+    downloadBase64Image: (url) => {
+        return (onClickData) => {
+            let tempImage = new Image;
+            tempImage.src = onClickData.srcUrl;
+            tempImage.onload = () =>
+            {
+                canvas.width = tempImage.width;
+                canvas.height = tempImage.height;
+                
+                context = canvas.getContext('2d');
+                context.drawImage(tempImage, 0, 0);
+        
+                let base64Url = canvas.toDataURL();
+
+                chrome.downloads.download(
+                    {
+                        url: base64Url,
+                        saveAs: true,
+                        method: "GET"
+                    }, 
+                    (downloadId) => {
+                        console.log(downloadId); 
+                    }
+                );
+            }
         }
     }
 }
