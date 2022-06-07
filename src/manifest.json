@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+    "name": "Context Menu Search",
+    "description": "Opens the selected text as keyword in a new window",
+    "version": "0.1",
+    "permissions": [
+        "contextMenus",
+        "tabs"
+    ],
+    "background": {
+        "page": "html/background.html",
+        "persistent": true
+    }
+}
