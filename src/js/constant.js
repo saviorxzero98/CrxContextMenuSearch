@@ -1,3 +1,4 @@
+const ContextMenuSearchTerm = '${search}';
 
 const ContextMenuRootId = {
     selection: 'selection_root',

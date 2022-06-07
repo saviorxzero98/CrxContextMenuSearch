@@ -1,47 +1,74 @@
 let contextMenuActions = {
-    searchSelectionText: (clickData) => {
-        let selectionText = clickData.selectionText;
-        chrome.tabs.create(
-            {
-                url: `https://www.google.com.tw/search?q=${selectionText}`
-            }
-        );
+    searchSelectionText: (url) => {
+        return (clickData) => {
+            let selectionText = clickData.selectionText;
+            let openUrl = url.replace(ContextMenuSearchTerm, selectionText);
+            chrome.tabs.create(
+                {
+                    url: openUrl
+                }
+            );
+        }
     },
 
-    searchPage: (clickData) => {
-        let pageUrl = clickData.pageUrl;
-        chrome.tabs.create(
-            {
-                url: `https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${pageUrl}`
+    searchPage: (url) => {
+        return (clickData) => {
+            let pageUrl = clickData.pageUrl;
+            let openUrl = pageUrl;
+            if (url) {
+                openUrl = url.replace(ContextMenuSearchTerm, pageUrl);
             }
-        )
+            chrome.tabs.create(
+                {
+                    url: openUrl
+                }
+            )
+        }
     },
 
-    searchLink: (clickData) => {
-        let linkUrl = clickData.linkUrl;
-        chrome.tabs.create(
-            {
-                url: `https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${linkUrl}`
+    searchLink: (url) => {
+        return (clickData) => {
+            let linkUrl = clickData.linkUrl;
+            let openUrl = linkUrl;
+            if (url) {
+                openUrl = url.replace(ContextMenuSearchTerm, linkUrl);
             }
-        );
+            chrome.tabs.create(
+                {
+                    url: openUrl
+                }
+            )
+        }
     },
 
-    openImage: (clickData) => {
-        let mediaUrl = clickData.srcUrl;
-        chrome.tabs.create(
-            {
-                url: mediaUrl
+    searchImage: (url) => {
+        return (clickData) => {
+            let imageUrl = clickData.srcUrl; 
+            let openUrl = imageUrl;
+            if (url) {
+                openUrl = url.replace(ContextMenuSearchTerm, imageUrl);
             }
-        );
+            chrome.tabs.create(
+                {
+                    url: openUrl
+                }
+            );
+        }
     },
 
-    openFrame: (clickData) => {
-        let frameUrl = clickData.frameUrl;
-        chrome.tabs.create(
-            {
-                url: frameUrl
+    searchFrame: (url) => {
+        return (clickData) => {
+            let frameUrl = clickData.frameUrl; 
+            let openUrl = frameUrl;
+            if (url) {
+                openUrl = url.replace(ContextMenuSearchTerm, frameUrl);
             }
-        );
+            chrome.tabs.create(
+                {
+                    url: openUrl
+                }
+            );
+        }
     }
 }
 
@@ -102,30 +129,34 @@ let contextMenuBuilder = {
 contextMenuBuilder.createSelectionMenu([
     {
         title: 'Google 搜尋',
-        onclick: contextMenuActions.searchSelectionText
+        onclick: contextMenuActions.searchSelectionText('https://www.google.com.tw/search?q=${search}')
     }
 ]);
 contextMenuBuilder.createPageMenu([
     {
         title: 'Google 網頁翻譯',
-        onclick: contextMenuActions.searchPage
+        onclick: contextMenuActions.searchPage('https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${search}')
     }
 ]);
 contextMenuBuilder.createLinkMenu([
     {
         title: 'Google 網頁翻譯',
-        onclick: contextMenuActions.searchLink,
+        onclick: contextMenuActions.searchLink('https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${search}'),
     }
 ]);
 contextMenuBuilder.createImageMenu([
     {
-        title: '開啟圖片',
-        onclick: contextMenuActions.openImage,
+        title: 'Google 圖片',
+        onclick: contextMenuActions.searchImage('https://images.google.com/searchbyimage?image_url=${search}'),
+    },
+    {
+        title: '在新分頁開啟圖片',
+        onclick: contextMenuActions.searchImage(),
     }
 ]);
 contextMenuBuilder.createFrameMenu([
     {
-        title: '開啟 Frame',
-        onclick: contextMenuActions.openFrame,
+        title: '在新分頁開啟 Frame',
+        onclick: contextMenuActions.searchFrame(),
     }
 ]);
