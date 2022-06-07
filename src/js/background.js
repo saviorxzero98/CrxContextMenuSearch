@@ -1,29 +1,32 @@
-function searchSelectionText(clickData) {
-    let query = clickData.searchSelectionText;
-    chrome.tabs.create(
-        {
-            url: `https://www.google.com.tw/search?q=${query}`
-        }
-    )
+let contextMenuActions = {
+    searchSelectionText: (clickData) => {
+        let query = clickData.selectionText;
+        chrome.tabs.create(
+            {
+                url: `https://www.google.com.tw/search?q=${query}`
+            }
+        )
+    },
+
+    searchPage: (clickData) => {
+        let pageUrl = clickData.pageUrl;
+        chrome.tabs.create(
+            {
+                url: `https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${pageUrl}`
+            }
+        )
+    },
+
+    openMedia: (clickData) => {
+        let mediaUrl = clickData.srcUrl;
+        chrome.tabs.create(
+            {
+                url: mediaUrl
+            }
+        )
+    }
 }
 
-function searchPage(clickData) {
-    let pageUrl = clickData.pageUrl;
-    chrome.tabs.create(
-        {
-            url: `https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${pageUrl}`
-        }
-    )
-}
-
-function openMedia(clickData) {
-    let mediaUrl = clickData.srcUrl;
-    chrome.tabs.create(
-        {
-            url: mediaUrl
-        }
-    )
-}
 
 chrome.contextMenus.create({
     type: 'separator',
@@ -38,7 +41,7 @@ chrome.contextMenus.create({
     contexts: [
         'selection'
     ],
-    onclick: searchSelectionText
+    onclick: contextMenuActions.searchSelectionText
 });
 chrome.contextMenus.create({
     id: 'googlePage',
@@ -46,7 +49,7 @@ chrome.contextMenus.create({
     contexts: [
         'page'
     ],
-    onclick: searchPage
+    onclick: contextMenuActions.searchPage
 });
 chrome.contextMenus.create({
     id: 'openImage',
@@ -54,5 +57,5 @@ chrome.contextMenus.create({
     contexts: [
         'image'
     ],
-    onclick: openMedia
+    onclick: contextMenuActions.openMedia
 });

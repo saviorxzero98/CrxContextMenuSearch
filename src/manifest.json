@@ -1,8 +1,14 @@
 {
     "manifest_version": 2,
     "name": "Context Menu Search",
-    "description": "Opens the selected text as keyword in a new window",
-    "version": "0.1",
+    "description": "Chrome Context Menu Search",
+    "version": "1.0",
+    "icons":
+	{
+		"128": "icon/128.png",
+		"16": "icon/16.png",
+		"48": "icon/48.png"
+	},
     "permissions": [
         "contextMenus",
         "tabs"
