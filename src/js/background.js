@@ -1,12 +1,13 @@
 let contextMenuActions = {
     searchSelectionText: (clickData) => {
-        let query = clickData.selectionText;
+        let selectionText = clickData.selectionText;
         chrome.tabs.create(
             {
-                url: `https://www.google.com.tw/search?q=${query}`
+                url: `https://www.google.com.tw/search?q=${selectionText}`
             }
-        )
+        );
     },
+
 
     searchPage: (clickData) => {
         let pageUrl = clickData.pageUrl;
@@ -17,14 +18,36 @@ let contextMenuActions = {
         )
     },
 
-    openMedia: (clickData) => {
+    searchLink: (clickData) => {
+        let linkUrl = clickData.linkUrl;
+        chrome.tabs.create(
+            {
+                url: `https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${linkUrl}`
+            }
+        );
+    },
+
+    searchMedia: (clickData) => {
         let mediaUrl = clickData.srcUrl;
         chrome.tabs.create(
             {
                 url: mediaUrl
             }
-        )
+        );
+    },
+
+    searchFrame: (clickData) => {
+        let frameUrl = clickData.frameUrl;
+        chrome.tabs.create(
+            {
+                url: frameUrl
+            }
+        );
     }
+}
+
+let contextMenuBuilder = {
+
 }
 
 
@@ -43,6 +66,7 @@ chrome.contextMenus.create({
     ],
     onclick: contextMenuActions.searchSelectionText
 });
+
 chrome.contextMenus.create({
     id: 'googlePage',
     title: 'Google 網頁翻譯',
@@ -52,10 +76,26 @@ chrome.contextMenus.create({
     onclick: contextMenuActions.searchPage
 });
 chrome.contextMenus.create({
+    id: 'googleLinkPage',
+    title: 'Google 網頁翻譯',
+    contexts: [
+        'link'
+    ],
+    onclick: contextMenuActions.searchLink
+});
+chrome.contextMenus.create({
     id: 'openImage',
     title: '開啟圖片',
     contexts: [
         'image'
     ],
-    onclick: contextMenuActions.openMedia
+    onclick: contextMenuActions.searchMedia
+});
+chrome.contextMenus.create({
+    id: 'openFrame',
+    title: '開啟 Frame',
+    contexts: [
+        'frame'
+    ],
+    onclick: contextMenuActions.searchFrame
 });
