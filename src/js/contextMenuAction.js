@@ -1,3 +1,4 @@
+
 class BaseMenuAction {
     constructor() {
 
@@ -14,109 +15,126 @@ class BaseMenuAction {
     }
 }
 
-class SelectionTextMenuAction extends BaseMenuAction {
+//--------------------------------------------------
+
+const SearchActionSearchTerm = '${search}';
+const SearchActionCommandType = {
+    selectionText: 'selection_text',
+    page: 'page',
+    link: 'link',
+    image: 'image',
+    frame: 'frame'
+}
+
+class SearchAction extends BaseMenuAction {
     constructor() {
         super();
     }
 
     execute(onClickData, context) {
+        let command = context.command ?? '';
+
+        switch (command.toLowerCase()) {
+            case SearchActionCommandType.selectionText:
+                this.searchSelectionText(onClickData, context);
+                break;
+
+            case SearchActionCommandType.page:
+                this.searchPageUrl(onClickData, context);
+                break;
+
+            case SearchActionCommandType.link:
+                this.searchLinkUrl(onClickData, context);
+                break;
+
+            case SearchActionCommandType.image:
+                this.searchImageUrl(onClickData, context);
+                break;
+
+            case SearchActionCommandType.frame:
+                this.searchFrameUrl(onClickData, context);
+                break;
+        }
+    }
+
+    searchSelectionText(onClickData, context) {
         let url = context.searchUrl;
         let selectionText = onClickData.selectionText;
-        let openUrl = url.replace(ContextMenuSearchTerm, selectionText);
 
-        chrome.tabs.create(
-            {
-                url: openUrl
-            }
-        );
-    }
-}
-
-class PageMenuAction extends BaseMenuAction {
-    constructor() {
-        super();
+        if (selectionText) {
+            let openUrl = this.replaceSearchTerm(url, selectionText);
+            this.createTab(openUrl);
+        }
     }
 
-    execute(onClickData, context) {
+    searchPageUrl(onClickData, context) {
         let url = context.searchUrl;
         let pageUrl = onClickData.pageUrl;
-        let openUrl = pageUrl;
-        if (url) {
-            openUrl = url.replace(ContextMenuSearchTerm, pageUrl);
+
+        if (pageUrl) {
+            let openUrl = this.replaceSearchTerm(url, pageUrl);
+            this.createTab(openUrl);
         }
-
-        chrome.tabs.create(
-            {
-                url: openUrl
-            }
-        );
-    }
-}
-
-class LinkMenuAction extends BaseMenuAction {
-    constructor() {
-        super();
     }
 
-    execute(onClickData, context) {
+    searchLinkUrl(onClickData, context) {
         let url = context.searchUrl;
         let linkUrl = onClickData.linkUrl;
-        let openUrl = linkUrl;
-        if (url) {
-            openUrl = url.replace(ContextMenuSearchTerm, linkUrl);
+
+        if (linkUrl) {
+            let openUrl = this.replaceSearchTerm(url, linkUrl);
+            this.createTab(openUrl);
         }
-
-        chrome.tabs.create(
-            {
-                url: openUrl
-            }
-        );
-    }
-}
-
-class ImageMenuAction extends BaseMenuAction {
-    constructor() {
-        super();
     }
 
-    execute(onClickData, context) {
+    searchImageUrl(onClickData, context) {
         let url = context.searchUrl;
         let imageUrl = onClickData.srcUrl; 
-        let openUrl = imageUrl;
-        if (url) {
-            openUrl = url.replace(ContextMenuSearchTerm, imageUrl);
+
+        if (imageUrl) {
+            let openUrl = this.replaceSearchTerm(url, imageUrl);
+            this.createTab(openUrl);
         }
-        chrome.tabs.create(
-            {
-                url: openUrl
-            }
-        );
-    }
-}
-
-class FrameMenuAction extends BaseMenuAction {
-    constructor() {
-        super();
     }
 
-    execute(onClickData, context) {
+    searchFrameUrl(onClickData, context) {
         let url = context.searchUrl;
         let frameUrl = onClickData.frameUrl; 
-        let openUrl = frameUrl;
-        if (url) {
-            openUrl = url.replace(ContextMenuSearchTerm, frameUrl);
-        }
 
+        if (frameUrl) {
+            let openUrl = this.replaceSearchTerm(url, frameUrl);
+            this.createTab(openUrl);
+        }
+    }
+
+    createTab(url) {
         chrome.tabs.create(
             {
-                url: openUrl
+                url: url
             }
         );
     }
+
+    replaceSearchTerm(url, search) {
+        if (url) {
+            let openUrl = url.replace(SearchActionSearchTerm, search);
+            return openUrl;
+        }
+        else {
+            return search;
+        }
+    }
 }
 
+//--------------------------------------------------
 
-class ImageBase64ConvertMenuAction extends BaseMenuAction {
+const ImageBase64ConvertActionCommandType = {
+    copy: 'copy',
+    open: 'open',
+    download: 'download'
+}
+
+class ImageBase64ConvertAction extends BaseMenuAction {
     constructor() {
         super();
         this.canvas = document.createElement('canvas');
@@ -127,15 +145,15 @@ class ImageBase64ConvertMenuAction extends BaseMenuAction {
         let command = context.command ?? '';
 
         switch (command.toLowerCase()) {
-            case 'copy':
+            case ImageBase64ConvertActionCommandType.copy:
                 this.copy(onClickData, context);
                 break;
 
-            case 'open':
+            case ImageBase64ConvertActionCommandType.open:
                 this.open(onClickData, context);
                 break;
 
-            case 'download':
+            case ImageBase64ConvertActionCommandType.download:
                 this.download(onClickData, context);
                 break;
         }
@@ -218,8 +236,9 @@ class ImageBase64ConvertMenuAction extends BaseMenuAction {
     }
 }
 
+//--------------------------------------------------
 
-class ChineseConvertMenuAction extends BaseMenuAction {
+class ChineseConvertAction extends BaseMenuAction {
     constructor() {
         super();
     }

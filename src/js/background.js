@@ -1,90 +1,81 @@
 let contextMenuActions = {
     searchSelectionText: (url) => {
-        let action = new SelectionTextMenuAction();
-        return action.getCallback({ searchUrl: url });
+        let action = new SearchAction();
+        return action.getCallback({
+            searchUrl: url, 
+            command: SearchActionCommandType.selectionText
+        });
     },
     searchPage: (url) => {
-        let action = new PageMenuAction();
-        return action.getCallback({ searchUrl: url });
+        let action = new SearchAction();
+        return action.getCallback({ 
+            searchUrl: url,
+            command: SearchActionCommandType.page
+        });
     },
     searchLink: (url) => {
-        let action = new LinkMenuAction();
-        return action.getCallback({ searchUrl: url });
+        let action = new SearchAction();
+        return action.getCallback({ 
+            searchUrl: url,
+            command: SearchActionCommandType.link
+        });
     },
     searchImage: (url) => {
-        let action = new ImageMenuAction();
-        return action.getCallback({ searchUrl: url });
+        let action = new SearchAction();
+        return action.getCallback({ 
+            searchUrl: url,
+            command: SearchActionCommandType.image
+        });
     },
     searchFrame: (url) => {
-        let action = new FrameMenuAction();
-        return action.getCallback({ searchUrl: url });
+        let action = new SearchAction();
+        return action.getCallback({ 
+            searchUrl: url,
+            command: SearchActionCommandType.frame
+        });
     },
 
 
     copyBase64Image: () => {
-        let action = new ImageBase64ConvertMenuAction();
-        return action.getCallback({ command: 'copy' });
+        let action = new ImageBase64ConvertAction();
+        return action.getCallback({ 
+            command: 'copy' 
+        });
     },
     openBase64Image: () => {
-        let action = new ImageBase64ConvertMenuAction();
-        return action.getCallback({ command: 'open' });
+        let action = new ImageBase64ConvertAction();
+        return action.getCallback({ 
+            command: 'open' 
+        });
     },
     downloadBase64Image: () => {
-        let action = new ImageBase64ConvertMenuAction();
-        return action.getCallback({ command: 'download' });
+        let action = new ImageBase64ConvertAction();
+        return action.getCallback({ 
+            command: 'download' 
+        });
     }
 }
 
 let contextMenuBuilder = {
     createSelectionMenu: (items) => {
-        let title = '搜尋 選取的文字';
-        contextMenuBuilder.createMenuItem(ContextMenuRootId.selection, title, ContextMenuType.selection);
-        contextMenuBuilder.createChildmenu(items, ContextMenuRootId.selection, ContextMenuType.selection);
+        let builder = new ContextMenuBuilder();
+        builder.createSelectionMenu(items);
     },
     createPageMenu: (items) => {
-        let title = '搜尋 目前頁面';
-        contextMenuBuilder.createMenuItem(ContextMenuRootId.page, title, ContextMenuType.page);
-        contextMenuBuilder.createChildmenu(items, ContextMenuRootId.page, ContextMenuType.page);
+        let builder = new ContextMenuBuilder();
+        builder.createPageMenu(items);
     },
     createLinkMenu: (items) =>  {
-        let title = '搜尋 超連結';
-        contextMenuBuilder.createMenuItem(ContextMenuRootId.link, title, ContextMenuType.link);
-        contextMenuBuilder.createChildmenu(items, ContextMenuRootId.link, ContextMenuType.link);
+        let builder = new ContextMenuBuilder();
+        builder.createLinkMenu(items);
     },
     createImageMenu: (items) =>  {
-        let title = '搜尋 圖片';
-        contextMenuBuilder.createMenuItem(ContextMenuRootId.image, title, ContextMenuType.image);
-        contextMenuBuilder.createChildmenu(items, ContextMenuRootId.image, ContextMenuType.image);
+        let builder = new ContextMenuBuilder();
+        builder.createImageMenu(items);
     },
     createFrameMenu: (items) =>  {
-        let title = '搜尋 Frame';
-        contextMenuBuilder.createMenuItem(ContextMenuRootId.frame, title, ContextMenuType.frame);
-        contextMenuBuilder.createChildmenu(items, ContextMenuRootId.frame, ContextMenuType.frame);
-    },
-
-    createMenuItem: (id, title, contextType, onclick = null, parentId = null) => {
-        chrome.contextMenus.create({
-            id: id,
-            title: title,
-            contexts: [
-                contextType
-            ],
-            onclick: onclick,
-            parentId: parentId
-        });
-    },
-
-    createChildmenu: (items, parentId, contextType) => {
-        if (items && Array.isArray(items)) {
-            for (let i = 0; i < items.length; i++) {
-                let item = items[i];
-
-                if (item && item.title) {
-                    let id = `${parentId}_${i}`;
-                    contextMenuBuilder.createMenuItem(id, item.title, contextType, item.onclick, parentId);
-                }
-            }
-        }
+        let builder = new ContextMenuBuilder();
+        builder.createFrameMenu(items);
     }
 }
 
