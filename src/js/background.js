@@ -1,143 +1,37 @@
 let contextMenuActions = {
     searchSelectionText: (url) => {
-        return (onClickData) => {
-            let selectionText = onClickData.selectionText;
-            let openUrl = url.replace(ContextMenuSearchTerm, selectionText);
-            chrome.tabs.create(
-                {
-                    url: openUrl
-                }
-            );
-        }
+        let action = new SelectionTextMenuAction();
+        return action.getCallback({ searchUrl: url });
     },
     searchPage: (url) => {
-        return (onClickData) => {
-            let pageUrl = onClickData.pageUrl;
-            let openUrl = pageUrl;
-            if (url) {
-                openUrl = url.replace(ContextMenuSearchTerm, pageUrl);
-            }
-            chrome.tabs.create(
-                {
-                    url: openUrl
-                }
-            )
-        }
+        let action = new PageMenuAction();
+        return action.getCallback({ searchUrl: url });
     },
     searchLink: (url) => {
-        return (onClickData) => {
-            let linkUrl = onClickData.linkUrl;
-            let openUrl = linkUrl;
-            if (url) {
-                openUrl = url.replace(ContextMenuSearchTerm, linkUrl);
-            }
-            chrome.tabs.create(
-                {
-                    url: openUrl
-                }
-            )
-        }
+        let action = new LinkMenuAction();
+        return action.getCallback({ searchUrl: url });
     },
     searchImage: (url) => {
-        return (onClickData) => {
-            let imageUrl = onClickData.srcUrl; 
-            let openUrl = imageUrl;
-            if (url) {
-                openUrl = url.replace(ContextMenuSearchTerm, imageUrl);
-            }
-            chrome.tabs.create(
-                {
-                    url: openUrl
-                }
-            );
-        }
+        let action = new ImageMenuAction();
+        return action.getCallback({ searchUrl: url });
     },
     searchFrame: (url) => {
-        return (onClickData) => {
-            let frameUrl = onClickData.frameUrl; 
-            let openUrl = frameUrl;
-            if (url) {
-                openUrl = url.replace(ContextMenuSearchTerm, frameUrl);
-            }
-            chrome.tabs.create(
-                {
-                    url: openUrl
-                }
-            );
-        }
+        let action = new FrameMenuAction();
+        return action.getCallback({ searchUrl: url });
     },
 
 
-    copyBase64Image: (url) => {
-        return (onClickData) => {
-            let tempImage = new Image;
-            tempImage.src = onClickData.srcUrl;
-            tempImage.onload = () =>
-            {
-                canvas.width = tempImage.width;
-                canvas.height = tempImage.height;
-                
-                context = canvas.getContext('2d');
-                context.drawImage(tempImage, 0, 0);
-        
-                tempContainer.textContent = canvas.toDataURL();
-                document.body.appendChild(tempContainer);
-                tempContainer.select();
-        
-                chrome.extension.getBackgroundPage().console.log(tempContainer.textContent);
-                document.execCommand('copy');
-                document.body.removeChild(tempContainer);
-            }
-        }
+    copyBase64Image: () => {
+        let action = new ImageBase64ConvertMenuAction();
+        return action.getCallback({ command: 'copy' });
     },
-    openBase64Image: (url) => {
-        return (onClickData) => {
-            let tempImage = new Image;
-            tempImage.src = onClickData.srcUrl;
-            tempImage.onload = () =>
-            {
-                canvas.width = tempImage.width;
-                canvas.height = tempImage.height;
-                
-                context = canvas.getContext('2d');
-                context.drawImage(tempImage, 0, 0);
-        
-                let base64Url = canvas.toDataURL();
-
-                chrome.tabs.create(
-                    {
-                        url: base64Url
-                    }
-                );
-            }
-        }
+    openBase64Image: () => {
+        let action = new ImageBase64ConvertMenuAction();
+        return action.getCallback({ command: 'open' });
     },
-    downloadBase64Image: (url) => {
-        return (onClickData) => {
-            let tempImage = new Image;
-            tempImage.src = onClickData.srcUrl;
-            tempImage.onload = () =>
-            {
-                canvas.width = tempImage.width;
-                canvas.height = tempImage.height;
-                
-                context = canvas.getContext('2d');
-                context.drawImage(tempImage, 0, 0);
-        
-                let base64Url = canvas.toDataURL();
-
-                chrome.downloads.download(
-                    {
-                        url: base64Url,
-                        saveAs: true,
-                        method: "GET"
-                    }, 
-                    (downloadId) => {
-                        console.log(downloadId); 
-                    }
-                );
-            }
-        }
+    downloadBase64Image: () => {
+        let action = new ImageBase64ConvertMenuAction();
+        return action.getCallback({ command: 'download' });
     }
 }
 
@@ -221,6 +115,18 @@ contextMenuBuilder.createImageMenu([
     {
         title: '在新分頁開啟圖片',
         onclick: contextMenuActions.searchImage(),
+    },
+    {
+        title: '在新分頁開啟圖片 (Data URI)',
+        onclick: contextMenuActions.openBase64Image(),
+    },
+    {
+        title: '複製圖片的 Data URI',
+        onclick: contextMenuActions.copyBase64Image(),
+    },
+    {
+        title: '下載圖片',
+        onclick: contextMenuActions.downloadBase64Image(),
     }
 ]);
 contextMenuBuilder.createFrameMenu([
