@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
-    "name": "Context Menu Search",
-    "description": "Chrome Context Menu Search",
+    "name": "Chrome Context Menu Search",
+    "description": "Chrome 右鍵選單搜尋工具",
     "version": "1.0",
     "icons":
 	{
