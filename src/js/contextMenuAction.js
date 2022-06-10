@@ -103,6 +103,8 @@ class SearchAction extends ContextMenuAction {
 
         if (pageUrl) {
             let openUrl = this.replaceUrl(url, pageUrl);
+            openUrl = this.replaceDomain(openUrl, pageUrl);
+            openUrl = this.replaceSubDomain(openUrl, pageUrl);
             this.createTab(openUrl);
         }
     }
@@ -113,6 +115,8 @@ class SearchAction extends ContextMenuAction {
 
         if (linkUrl) {
             let openUrl = this.replaceUrl(url, linkUrl);
+            openUrl = this.replaceDomain(openUrl, linkUrl);
+            openUrl = this.replaceSubDomain(openUrl, linkUrl);
             this.createTab(openUrl);
         }
     }
@@ -183,6 +187,36 @@ class SearchAction extends ContextMenuAction {
         else {
             return url;
         }
+    }
+
+    replaceDomain(baseUrl, url) {
+        if (baseUrl && url) {
+            let path = url.replace('https://', '')
+                          .replace('http://', '')
+                          .split('/');
+            
+            if (path.length !== 0) {
+                let domain = path[0];
+                let openUrl = baseUrl.replace(UrlPlaceholders.domain, domain);
+                return openUrl;
+            }
+        }
+        return '';
+    }
+
+    replaceSubDomain(baseUrl, url) {
+        if (baseUrl && url) {
+            let path = url.replace('https://www.', '')
+                          .replace('http://www.', '')
+                          .split('/');
+            
+            if (path.length !== 0) {
+                let subdomain = path[0];
+                let openUrl = baseUrl.replace(UrlPlaceholders.subdomain, subdomain);
+                return openUrl;
+            }
+        }
+        return '';
     }
 }
 

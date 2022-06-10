@@ -148,6 +148,14 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
+                    title: 'LINE TV',
+                    url: 'https://www.linetv.tw/search?q=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
                     title: '巴哈姆特 動畫瘋',
                     url: 'https://ani.gamer.com.tw/search.php?kw=${search}',
                     isEnable: true
@@ -158,7 +166,7 @@ const ContentMenuItems = {
                     action: ContextMenuActionType.search,
                     title: 'Anime1.me',
                     url: 'https://anime1.me/?s=${search}',
-                    isEnable: true
+                    isEnable: false
                 },
                 {
                     itemType: ContextMenuItemType.normal,
@@ -180,9 +188,17 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
+                    title: 'MP3-PM',
+                    url: 'https://wax.click/?a=redirect&q=${search}',
+                    isEnable: false
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
                     title: '漫貓動漫BT',
                     url: 'http://www.comicat.org/search.php?keyword=${search}',
-                    isEnable: true
+                    isEnable: false
                 },
                 {
                     itemType: ContextMenuItemType.normal,
@@ -190,7 +206,7 @@ const ContentMenuItems = {
                     action: ContextMenuActionType.search,
                     title: '射手網(偽)',
                     url: 'https://assrt.net/sub/?searchword=${search}',
-                    isEnable: true
+                    isEnable: false
                 }
             ],
             isEnable: true
@@ -200,7 +216,54 @@ const ContentMenuItems = {
             contentType: ContextMenuType.selection,
             title: '其他',
             items: [
-
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: '巴哈姆特',
+                    url: 'https://search.gamer.com.tw/?q=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: '阿榮福利味',
+                    url: 'https://www.azofreeware.com/search?q=${search}',
+                    isEnable: false
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Android台灣中文網',
+                    url: 'https://apk.tw/search.php?mod=google&cx=partner-pub-7702824122407732%3A4996651148&q=${search}',
+                    isEnable: false
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Google 地圖',
+                    url: 'https://maps.google.com/maps?q=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Bing 地圖',
+                    url: 'https://www.bing.com/maps/?q=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Chrome 商店',
+                    url: 'https://chrome.google.com/webstore/search/${search}',
+                    isEnable: true
+                }
             ],
             isEnable: true
         }
@@ -238,6 +301,47 @@ const ContentMenuItems = {
             title: 'Google 快取頁面',
             url: 'https://webcache.googleusercontent.com/search?q=cache:${url}',
             isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.normal,
+            contentType: ContextMenuType.page,
+            action: ContextMenuActionType.search,
+            title: '複製目前分頁',
+            url: '${url}',
+            isEnable: true
+        },
+        
+        {
+            itemType: ContextMenuItemType.separator,
+            contentType: ContextMenuType.page,
+            action: '',
+            title: '',
+            url: '',
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.folder,
+            contentType: ContextMenuType.page,
+            title: '安全掃描',
+            items: [
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.page,
+                    action: ContextMenuActionType.search,
+                    title: 'VirusTotal',
+                    url: 'https://www.virustotal.com/gui/search/${domain}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.page,
+                    action: ContextMenuActionType.search,
+                    title: 'Urivoid',
+                    url: 'https://www.urlvoid.com/scan/${subdomain}',
+                    isEnable: true
+                }
+            ],
+            isEnable: true
         }
     ],
 
@@ -273,6 +377,47 @@ const ContentMenuItems = {
             title: 'Google 快取頁面',
             url: 'https://webcache.googleusercontent.com/search?q=cache:${url}',
             isEnable: true
+        },
+        
+        {
+            itemType: ContextMenuItemType.normal,
+            contentType: ContextMenuType.link,
+            action: ContextMenuActionType.search,
+            title: '在新分頁開啟連結',
+            url: '${url}',
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.separator,
+            contentType: ContextMenuType.link,
+            action: '',
+            title: '',
+            url: '',
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.folder,
+            contentType: ContextMenuType.link,
+            title: '安全掃描',
+            items: [
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.link,
+                    action: ContextMenuActionType.search,
+                    title: 'VirusTotal',
+                    url: 'https://www.virustotal.com/gui/search/${domain}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.link,
+                    action: ContextMenuActionType.search,
+                    title: 'Urivoid',
+                    url: 'https://www.urlvoid.com/scan/${domain}',
+                    isEnable: true
+                }
+            ],
+            isEnable: true
         }
     ],
 
@@ -299,6 +444,14 @@ const ContentMenuItems = {
             action: ContextMenuActionType.search,
             title: 'TinEye 圖片搜尋',
             url: 'https://www.tineye.com/search?url=${url}',
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.normal,
+            contentType: ContextMenuType.image,
+            action: ContextMenuActionType.search,
+            title: 'Yandex 圖片搜尋',
+            url: 'https://yandex.com/images/search?rpt=imageview&url=${url}',
             isEnable: true
         },
         {
