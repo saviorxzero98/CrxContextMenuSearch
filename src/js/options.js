@@ -18,6 +18,191 @@ const ContentMenuItems = {
             title: '維基百科',
             url: 'https://zh.wikipedia.org/w/index.php?search=${search}',
             isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.folder,
+            contentType: ContextMenuType.selection,
+            title: '搜尋',
+            items: [
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Google 搜尋',
+                    url: 'https://www.google.com.tw/search?q=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Bing 搜尋',
+                    url: 'https://www.bing.com/search?q=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Yahoo!奇摩',
+                    url: 'https://tw.search.yahoo.com/search?p=${search}&amp;fr=opensearch',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'DuckDuckGo',
+                    url: 'https://duckduckgo.com/?q=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: '維基百科',
+                    url: 'https://zh.wikipedia.org/w/index.php?search=${search}',
+                    isEnable: true
+                }
+            ],
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.folder,
+            contentType: ContextMenuType.selection,
+            title: '翻譯、辭典',
+            items: [
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Yahoo!奇摩字典',
+                    url: 'https://tw.dictionary.search.yahoo.com/search?p=${search}&amp;fr=opensearch',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Google翻譯 (中文)',
+                    url: 'https://translate.google.com.tw/?hl=zh-TW&sl=auto&tl=zh-TW&text=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Bing翻譯 (中文)',
+                    url: 'https://www.bing.com/translator/?to=zh-Hant&text=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: '維基辭典',
+                    url: 'https://zh.wiktionary.org/zh-hant/{search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Google翻譯 (英文)',
+                    url: 'https://translate.google.com.tw/?hl=zh-TW&sl=auto&tl=en&text=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Bing翻譯 (英文)',
+                    url: 'https://www.bing.com/translator/?to=en&text=${search}',
+                    isEnable: true
+                }
+            ],
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.folder,
+            contentType: ContextMenuType.selection,
+            title: '圖片、影音',
+            items: [
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Google圖片',
+                    url: 'https://www.google.com/images?q=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'YouTube',
+                    url: 'https://www.youtube.com/results?search_query=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: '巴哈姆特 動畫瘋',
+                    url: 'https://ani.gamer.com.tw/search.php?kw=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Anime1.me',
+                    url: 'https://anime1.me/?s=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Hikarinoakariost',
+                    url: 'https://hikarinoakari.com/?s=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Sukidesuost',
+                    url: 'https://sukidesuost.info/?s=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: '漫貓動漫BT',
+                    url: 'http://www.comicat.org/search.php?keyword=${search}',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: '射手網(偽)',
+                    url: 'https://assrt.net/sub/?searchword=${search}',
+                    isEnable: true
+                }
+            ],
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.folder,
+            contentType: ContextMenuType.selection,
+            title: '其他',
+            items: [
+
+            ],
+            isEnable: true
         }
     ],
 

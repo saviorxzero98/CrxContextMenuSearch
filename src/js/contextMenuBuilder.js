@@ -6,7 +6,8 @@ const ContextMenuRootId = {
     image: 'image_root',
     audio: 'audio_root',
     video: 'video_root',
-    frame: 'frame_root'
+    frame: 'frame_root',
+    recent: 'recent'
 }
 
 const ContextMenuItemType = {
