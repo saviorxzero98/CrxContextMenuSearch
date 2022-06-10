@@ -1,5 +1,17 @@
+const ContextMenuActionType = {
+    search: 'search',
+    base64Image: 'base64_image',
+    chineseConvert: 'chinese_convert'
+};
 
-class BaseMenuAction {
+const UrlPlaceholders = {
+    selectionText: '${search}',
+    url: '${url}',
+    domain: '${domain}',
+    subdomain: '${subdomain}'
+}
+
+class ContextMenuAction {
     constructor() {
 
     }
@@ -15,94 +27,132 @@ class BaseMenuAction {
     }
 }
 
-//--------------------------------------------------
 
-const SearchActionSearchTerm = '${search}';
-const SearchActionCommandType = {
-    selectionText: 'selection_text',
-    page: 'page',
-    link: 'link',
-    image: 'image',
-    frame: 'frame'
+const ContextMenuActionFactory = {
+    create: (action) => {
+        if (action) {
+            switch (action.toLowerCase()) {
+                case ContextMenuActionType.search:
+                    return new SearchAction();
+
+                case ContextMenuActionType.base64Image:
+                    return new ImageBase64ConvertAction();
+
+                case ContextMenuActionType.ChineseConvertAction:
+                    return new ChineseConvertAction();
+            }
+        }
+        return new ContextMenuAction();
+    }
 }
 
-class SearchAction extends BaseMenuAction {
+//--------------------------------------------------
+
+class SearchAction extends ContextMenuAction {
     constructor() {
         super();
     }
 
     execute(onClickData, context) {
-        let command = context.command ?? '';
+        let contentType = context.contentType ?? '';
 
-        switch (command.toLowerCase()) {
-            case SearchActionCommandType.selectionText:
+        switch (contentType.toLowerCase()) {
+            case ContextMenuType.selection:
                 this.searchSelectionText(onClickData, context);
                 break;
 
-            case SearchActionCommandType.page:
+            case ContextMenuType.page:
                 this.searchPageUrl(onClickData, context);
                 break;
 
-            case SearchActionCommandType.link:
+            case ContextMenuType.link:
                 this.searchLinkUrl(onClickData, context);
                 break;
 
-            case SearchActionCommandType.image:
+            case ContextMenuType.image:
                 this.searchImageUrl(onClickData, context);
                 break;
 
-            case SearchActionCommandType.frame:
+            case ContextMenuType.audio:
+                this.searchAudioUrl(onClickData, context);
+                break;
+
+            case ContextMenuType.video:
+                this.searchVideoUrl(onClickData, context);
+                break;
+
+            case ContextMenuType.frame:
                 this.searchFrameUrl(onClickData, context);
                 break;
         }
     }
 
     searchSelectionText(onClickData, context) {
-        let url = context.searchUrl;
+        let url = context.url;
         let selectionText = onClickData.selectionText;
 
         if (selectionText) {
-            let openUrl = this.replaceSearchTerm(url, selectionText);
+            let openUrl = this.replaceSelectionText(url, selectionText);
             this.createTab(openUrl);
         }
     }
 
     searchPageUrl(onClickData, context) {
-        let url = context.searchUrl;
+        let url = context.url;
         let pageUrl = onClickData.pageUrl;
 
         if (pageUrl) {
-            let openUrl = this.replaceSearchTerm(url, pageUrl);
+            let openUrl = this.replaceUrl(url, pageUrl);
             this.createTab(openUrl);
         }
     }
 
     searchLinkUrl(onClickData, context) {
-        let url = context.searchUrl;
+        let url = context.url;
         let linkUrl = onClickData.linkUrl;
 
         if (linkUrl) {
-            let openUrl = this.replaceSearchTerm(url, linkUrl);
+            let openUrl = this.replaceUrl(url, linkUrl);
             this.createTab(openUrl);
         }
     }
 
     searchImageUrl(onClickData, context) {
-        let url = context.searchUrl;
+        let url = context.url;
         let imageUrl = onClickData.srcUrl; 
 
         if (imageUrl) {
-            let openUrl = this.replaceSearchTerm(url, imageUrl);
+            let openUrl = this.replaceUrl(url, imageUrl);
+            this.createTab(openUrl);
+        }
+    }
+
+    searchAudioUrl(onClickData, context) {
+        let url = context.url;
+        let audioUrl = onClickData.srcUrl; 
+
+        if (audioUrl) {
+            let openUrl = this.replaceUrl(url, audioUrl);
+            this.createTab(openUrl);
+        }
+    }
+
+    searchVideoUrl(onClickData, context) {
+        let url = context.url;
+        let videoUrl = onClickData.srcUrl; 
+
+        if (videoUrl) {
+            let openUrl = this.replaceUrl(url, videoUrl);
             this.createTab(openUrl);
         }
     }
 
     searchFrameUrl(onClickData, context) {
-        let url = context.searchUrl;
+        let url = context.url;
         let frameUrl = onClickData.frameUrl; 
 
         if (frameUrl) {
-            let openUrl = this.replaceSearchTerm(url, frameUrl);
+            let openUrl = this.replaceUrl(url, frameUrl);
             this.createTab(openUrl);
         }
     }
@@ -115,13 +165,23 @@ class SearchAction extends BaseMenuAction {
         );
     }
 
-    replaceSearchTerm(url, search) {
-        if (url) {
-            let openUrl = url.replace(SearchActionSearchTerm, search);
+    replaceSelectionText(baseUrl, selectionText) {
+        if (baseUrl) {
+            let openUrl = baseUrl.replace(UrlPlaceholders.selectionText, selectionText);
             return openUrl;
         }
         else {
-            return search;
+            return selectionText;
+        }
+    }
+
+    replaceUrl(baseUrl, url) {
+        if (baseUrl) {
+            let openUrl = baseUrl.replace(UrlPlaceholders.url, url);
+            return openUrl;
+        }
+        else {
+            return url;
         }
     }
 }
@@ -134,7 +194,7 @@ const ImageBase64ConvertActionCommandType = {
     download: 'download'
 }
 
-class ImageBase64ConvertAction extends BaseMenuAction {
+class ImageBase64ConvertAction extends ContextMenuAction {
     constructor() {
         super();
         this.canvas = document.createElement('canvas');
@@ -238,7 +298,7 @@ class ImageBase64ConvertAction extends BaseMenuAction {
 
 //--------------------------------------------------
 
-class ChineseConvertAction extends BaseMenuAction {
+class ChineseConvertAction extends ContextMenuAction {
     constructor() {
         super();
     }

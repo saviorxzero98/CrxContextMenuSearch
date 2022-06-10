@@ -1,13 +1,18 @@
 const ContextMenuRootId = {
+    all: 'all_root',
     selection: 'selection_root',
     page: 'page_root',
     link: 'link_root',
     image: 'image_root',
+    audio: 'audio_root',
+    video: 'video_root',
     frame: 'frame_root'
 }
 
 const ContextMenuItemType = {
-    link: 'link',
+    normal: 'normal',
+    checkbox: 'checkbox',
+    radio: 'radio',
     folder: 'folder',
     separator: 'separator'
 };
@@ -27,16 +32,36 @@ const ContextMenuType = {
 
 
 class ContextMenuBuilder {
+    createMenu(menuItems) {
+        this.removeAll();
 
-    createContextMenu(items) {
-
+        this.createSelectionMenu(menuItems.selection);
+        this.createPageMenu(menuItems.page);
+        this.createLinkMenu(menuItems.link);
+        this.createImageMenu(menuItems.image);
+        this.createAudioMenu(menuItems.audio);
+        this.createVideoMenu(menuItems.video);
+        this.createFrameMenu(menuItems.frame);
     }
 
-    //--------------------------------------------------
+    createAllMenu(items) {
+        let id = ContextMenuRootId.all;
+        let title = '搜尋';
+        let contextType = ContextMenuType.all;
+
+        // Create Menu Root Item
+        let rootItem = {
+            title: title
+        }
+        this.createMenuItem(id, rootItem, contextType);
+
+        // Create Menu Items
+        this.createChildMenuItems(items, contextType, id);
+    }
 
     createSelectionMenu(items) {
         let id = ContextMenuRootId.selection;
-        let title = '搜尋文字';
+        let title = `搜尋「%s」`;
         let contextType = ContextMenuType.selection;
 
         // Create Menu Root Item
@@ -51,7 +76,7 @@ class ContextMenuBuilder {
 
     createPageMenu(items) {
         let id = ContextMenuRootId.page;
-        let title = '搜尋目前頁面';
+        let title = '搜尋「目前頁面」';
         let contextType = ContextMenuType.page;
 
         // Create Menu Root Item
@@ -66,7 +91,7 @@ class ContextMenuBuilder {
 
     createLinkMenu(items) {
         let id = ContextMenuRootId.link;
-        let title = '搜尋連結';
+        let title = '搜尋「連結」';
         let contextType = ContextMenuType.link;
 
         // Create Menu Root Item
@@ -81,8 +106,38 @@ class ContextMenuBuilder {
 
     createImageMenu(items) {
         let id = ContextMenuRootId.image;
-        let title = '搜尋圖片';
+        let title = '搜尋「圖片」';
         let contextType = ContextMenuType.image;
+
+        // Create Menu Root Item
+        let rootItem = {
+            title: title
+        }
+        this.createMenuItem(id, rootItem, contextType);
+
+        // Create Menu Items
+        this.createChildMenuItems(items, contextType, id);
+    }
+
+    createAudioMenu(items) {
+        let id = ContextMenuRootId.audio;
+        let title = '搜尋「音頻」';
+        let contextType = ContextMenuType.audio;
+
+        // Create Menu Root Item
+        let rootItem = {
+            title: title
+        }
+        this.createMenuItem(id, rootItem, contextType);
+
+        // Create Menu Items
+        this.createChildMenuItems(items, contextType, id);
+    }
+
+    createVideoMenu(items) {
+        let id = ContextMenuRootId.video;
+        let title = '搜尋「影片」';
+        let contextType = ContextMenuType.video;
 
         // Create Menu Root Item
         let rootItem = {
@@ -96,7 +151,7 @@ class ContextMenuBuilder {
 
     createFrameMenu(items) {
         let id = ContextMenuRootId.frame;
-        let title = '搜尋框架';
+        let title = '搜尋「框架」';
         let contextType = ContextMenuType.frame;
 
         // Create Menu Root Item
@@ -114,7 +169,9 @@ class ContextMenuBuilder {
     createMenuItem(id, item, contextType, parentId = null) {
         if (item) {
             let title = item.title;
-            let onclick = item.onclick;
+            let action = ContextMenuActionFactory.create(item.action);
+            let context = { ...item };
+            let onclick = action.getCallback(context);
 
             if (title) {
                 chrome.contextMenus.create({
@@ -141,5 +198,9 @@ class ContextMenuBuilder {
                 }
             }
         }
+    }
+
+    removeAll(callback = null) {
+        chrome.contextMenus.removeAll(callback);
     }
 }
