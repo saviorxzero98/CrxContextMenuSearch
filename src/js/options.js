@@ -19,6 +19,15 @@ const ContentMenuItems = {
             title: '維基百科',
             url: 'https://zh.wikipedia.org/w/index.php?search=${search}',
             iconUrl: 'https://api.faviconkit.com/zh.wikipedia.org/64',
+            isEnable: false
+        },
+        {
+            itemType: ContextMenuItemType.normal,
+            contentType: ContextMenuType.selection,
+            action: ContextMenuActionType.search,
+            title: 'Wikiwand',
+            url: 'https://www.wikiwand.com/zh-tw/${search}',
+            iconUrl: 'https://wikiwand-19431.kxcdn.com/favicon.ico',
             isEnable: true
         },
         {
@@ -70,7 +79,34 @@ const ContentMenuItems = {
                     url: 'https://zh.wikipedia.org/w/index.php?search=${search}',
                     iconUrl: 'https://zh.wikipedia.org/static/favicon/wikipedia.ico',
                     isEnable: true
-                }
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Wikiwand',
+                    url: 'https://www.wikiwand.com/zh-tw/${search}',
+                    iconUrl: 'https://wikiwand-19431.kxcdn.com/favicon.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Komica Wiki',
+                    url: 'https://wiki.komica.org/index.php?search=${search}',
+                    iconUrl: 'https://wiki.komica.org/images/thumb/5/56/Wikigirl.png/450px-Wikigirl.png',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: '萌娘百科',
+                    url: 'https://zh.moegirl.org.cn/index.php?search=${search}',
+                    iconUrl: 'https://zh.moegirl.org.cn/favicon.ico',
+                    isEnable: true
+                },
             ],
             isEnable: true
         },
