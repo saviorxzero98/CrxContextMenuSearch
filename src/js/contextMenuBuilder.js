@@ -166,6 +166,33 @@ class ContextMenuBuilder {
 
     //--------------------------------------------------
 
+    createChildMenuItems(items, contextType, parentId) {
+        if (items && Array.isArray(items)) {
+            for (let i = 0; i < items.length; i++) {
+                let item = items[i];
+
+                if (item && item.isEnable && item.isEnable === true) {
+                    let id = `${parentId}_${i}`;
+                    let itemType = item.itemType ?? ContextMenuItemType.normal;
+                    
+                    switch (itemType) {
+                        case ContextMenuItemType.normal:
+                            this.createMenuItem(id, item, contextType, parentId);
+                            break;
+
+                        case ContextMenuItemType.separator:
+                            this.createSeparator(id, item, contextType, parentId);
+                            break;
+
+                        case ContextMenuItemType.folder:
+                            this.createFolder(id, item, contextType, parentId);
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
     createMenuItem(id, item, contextType, parentId = null) {
         if (item) {
             let title = item.title;
@@ -176,6 +203,7 @@ class ContextMenuBuilder {
             if (title) {
                 chrome.contextMenus.create({
                     id: id,
+                    type: ContextMenuItemType.normal,
                     title: title,
                     contexts: [
                         contextType
@@ -187,18 +215,40 @@ class ContextMenuBuilder {
         }
     }
 
-    createChildMenuItems(items, contextType, parentId) {
-        if (items && Array.isArray(items)) {
-            for (let i = 0; i < items.length; i++) {
-                let item = items[i];
+    createSeparator(id, item, contextType, parentId = null) {
+        chrome.contextMenus.create({
+            id: id,
+            type: ContextMenuItemType.separator,
+            title: '',
+            contexts: [
+                contextType
+            ],
+            parentId: parentId
+        });
+    }
 
-                if (item) {
-                    let id = `${parentId}_${i}`;
-                    this.createMenuItem(id, item, contextType, parentId);
-                }
-            }
+    createFolder(id, item, contextType, parentId = null) {
+        let childrenItems = item.items;
+        let title = item.title;
+        
+        if (childrenItems && Array.isArray(childrenItems)) {
+            // 建立 Folder
+            chrome.contextMenus.create({
+                id: id,
+                type: ContextMenuItemType.normal,
+                title: title,
+                contexts: [
+                    contextType
+                ],
+                parentId: parentId
+            });
+
+            // 建立子選單
+            this.createChildMenuItems(childrenItems, contextType, id);
         }
     }
+
+    //--------------------------------------------------
 
     removeAll(callback = null) {
         chrome.contextMenus.removeAll(callback);
