@@ -6,9 +6,20 @@ const ContextMenuRootId = {
     image: 'image_root',
     audio: 'audio_root',
     video: 'video_root',
-    frame: 'frame_root',
-    recent: 'recent'
+    frame: 'frame_root'
 }
+
+const ContextMenuRecentId = {
+    all: 'recent_all',
+    selection: 'recent_selection',
+    page: 'recent_page',
+    link: 'recent_link',
+    image: 'recent_image',
+    audio: 'recent_audio',
+    video: 'recent_video',
+    frame: 'recent_frame'
+}
+
 
 const ContextMenuItemType = {
     normal: 'normal',
@@ -56,8 +67,12 @@ class ContextMenuBuilder {
         }
         this.createMenuItem(id, rootItem, contextType);
 
-        // Create Menu Items
-        this.createChildMenuItems(items, contextType, id);
+        // Create Recent Item
+        let recentId = ContextMenuRecentId.all;
+        this.createRecentSearchMenuItem(recentId, contextType, id, () => {
+            // Create Menu Items
+            this.createChildMenuItems(items, contextType, id);
+        });
     }
 
     createSelectionMenu(items) {
@@ -71,8 +86,13 @@ class ContextMenuBuilder {
         }
         this.createMenuItem(id, rootItem, contextType);
 
-        // Create Menu Items
-        this.createChildMenuItems(items, contextType, id);
+        
+        // Create Recent Item
+        let recentId = ContextMenuRecentId.selection;
+        this.createRecentSearchMenuItem(recentId, contextType, id, () => {
+            // Create Menu Items
+            this.createChildMenuItems(items, contextType, id);
+        });
     }
 
     createPageMenu(items) {
@@ -86,8 +106,12 @@ class ContextMenuBuilder {
         }
         this.createMenuItem(id, rootItem, contextType);
 
-        // Create Menu Items
-        this.createChildMenuItems(items, contextType, id);
+        // Create Recent Item
+        let recentId = ContextMenuRecentId.page;
+        this.createRecentSearchMenuItem(recentId, contextType, id, () => {
+            // Create Menu Items
+            this.createChildMenuItems(items, contextType, id);
+        });
     }
 
     createLinkMenu(items) {
@@ -101,10 +125,13 @@ class ContextMenuBuilder {
         }
         this.createMenuItem(id, rootItem, contextType);
 
-        // Create Menu Items
-        this.createChildMenuItems(items, contextType, id);
+        // Create Recent Item
+        let recentId = ContextMenuRecentId.link;
+        this.createRecentSearchMenuItem(recentId, contextType, id, () => {
+            // Create Menu Items
+            this.createChildMenuItems(items, contextType, id);
+        });
     }
-
     createImageMenu(items) {
         let id = ContextMenuRootId.image;
         let title = '搜尋「圖片」';
@@ -116,8 +143,12 @@ class ContextMenuBuilder {
         }
         this.createMenuItem(id, rootItem, contextType);
 
-        // Create Menu Items
-        this.createChildMenuItems(items, contextType, id);
+        // Create Recent Item
+        let recentId = ContextMenuRecentId.image;
+        this.createRecentSearchMenuItem(recentId, contextType, id, () => {
+            // Create Menu Items
+            this.createChildMenuItems(items, contextType, id);
+        });
     }
 
     createAudioMenu(items) {
@@ -131,8 +162,12 @@ class ContextMenuBuilder {
         }
         this.createMenuItem(id, rootItem, contextType);
 
-        // Create Menu Items
-        this.createChildMenuItems(items, contextType, id);
+        // Create Recent Item
+        let recentId = ContextMenuRecentId.audio;
+        this.createRecentSearchMenuItem(recentId, contextType, id, () => {
+            // Create Menu Items
+            this.createChildMenuItems(items, contextType, id);
+        });
     }
 
     createVideoMenu(items) {
@@ -146,10 +181,13 @@ class ContextMenuBuilder {
         }
         this.createMenuItem(id, rootItem, contextType);
 
-        // Create Menu Items
-        this.createChildMenuItems(items, contextType, id);
+        // Create Recent Item
+        let recentId = ContextMenuRecentId.video;
+        this.createRecentSearchMenuItem(recentId, contextType, id, () => {
+            // Create Menu Items
+            this.createChildMenuItems(items, contextType, id);
+        });
     }
-
     createFrameMenu(items) {
         let id = ContextMenuRootId.frame;
         let title = '搜尋「框架」';
@@ -161,11 +199,34 @@ class ContextMenuBuilder {
         }
         this.createMenuItem(id, rootItem, contextType);
 
-        // Create Menu Items
-        this.createChildMenuItems(items, contextType, id);
+        // Create Recent Item
+        let recentId = ContextMenuRecentId.frame;
+        this.createRecentSearchMenuItem(recentId, contextType, id, () => {
+            // Create Menu Items
+            this.createChildMenuItems(items, contextType, id);
+        });
     }
 
     //--------------------------------------------------
+
+    createRecentSearchMenuItem(id, contextType, parentId, callback = () => {}) {
+        let self = this;
+        RecentSearchCacheService.get(contextType, (item) => {
+            if (item) {
+                // Create Recent Item
+                self.createMenuItem(id, item, contextType, parentId);
+
+                // Create Recent Item Separator
+                let separatorId = `${id}_separator`;
+                self.createSeparator(separatorId, contextType, parentId);
+            }
+
+            // Callback
+            if (callback && typeof callback === 'function') {
+                callback();
+            }
+        });
+    }
 
     createChildMenuItems(items, contextType, parentId) {
         if (items && Array.isArray(items)) {
@@ -182,7 +243,7 @@ class ContextMenuBuilder {
                             break;
 
                         case ContextMenuItemType.separator:
-                            this.createSeparator(id, item, contextType, parentId);
+                            this.createSeparator(id, contextType, parentId);
                             break;
 
                         case ContextMenuItemType.folder:
@@ -216,7 +277,7 @@ class ContextMenuBuilder {
         }
     }
 
-    createSeparator(id, item, contextType, parentId = null) {
+    createSeparator(id, contextType, parentId = null) {
         chrome.contextMenus.create({
             id: id,
             type: ContextMenuItemType.separator,
@@ -250,6 +311,10 @@ class ContextMenuBuilder {
     }
 
     //--------------------------------------------------
+
+    remove(id) {
+        chrome.contextMenus.remove(id);
+    }
 
     removeAll(callback = null) {
         chrome.contextMenus.removeAll(callback);

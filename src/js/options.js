@@ -400,7 +400,7 @@ const ContentMenuItems = {
         {
             itemType: ContextMenuItemType.folder,
             contentType: ContextMenuType.page,
-            title: '安全掃描',
+            title: '網頁安全掃描',
             items: [
                 {
                     itemType: ContextMenuItemType.normal,
@@ -482,7 +482,7 @@ const ContentMenuItems = {
         {
             itemType: ContextMenuItemType.folder,
             contentType: ContextMenuType.link,
-            title: '安全掃描',
+            title: '連結安全掃描',
             items: [
                 {
                     itemType: ContextMenuItemType.normal,

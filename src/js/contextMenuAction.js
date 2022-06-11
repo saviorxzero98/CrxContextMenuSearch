@@ -25,6 +25,13 @@ class ContextMenuAction {
     execute(onClickData, context) {
 
     }
+
+    updateRecentSearch(context) {
+        RecentSearchCacheService.set(context.contentType, context);
+
+        let builder = new ContextMenuBuilder();
+        builder.createMenu(ContentMenuItems);
+    }
 }
 
 
@@ -92,6 +99,7 @@ class SearchAction extends ContextMenuAction {
         let selectionText = onClickData.selectionText;
 
         if (selectionText) {
+            this.updateRecentSearch(context);
             let openUrl = this.replaceSelectionText(url, selectionText);
             this.createTab(openUrl);
         }
@@ -102,6 +110,7 @@ class SearchAction extends ContextMenuAction {
         let pageUrl = onClickData.pageUrl;
 
         if (pageUrl) {
+            this.updateRecentSearch(context);
             let openUrl = this.replaceUrl(url, pageUrl);
             openUrl = this.replaceDomain(openUrl, pageUrl);
             openUrl = this.replaceSubDomain(openUrl, pageUrl);
@@ -114,6 +123,7 @@ class SearchAction extends ContextMenuAction {
         let linkUrl = onClickData.linkUrl;
 
         if (linkUrl) {
+            this.updateRecentSearch(context);
             let openUrl = this.replaceUrl(url, linkUrl);
             openUrl = this.replaceDomain(openUrl, linkUrl);
             openUrl = this.replaceSubDomain(openUrl, linkUrl);
@@ -126,6 +136,7 @@ class SearchAction extends ContextMenuAction {
         let imageUrl = onClickData.srcUrl; 
 
         if (imageUrl) {
+            this.updateRecentSearch(context);
             let openUrl = this.replaceUrl(url, imageUrl);
             this.createTab(openUrl);
         }
@@ -136,6 +147,7 @@ class SearchAction extends ContextMenuAction {
         let audioUrl = onClickData.srcUrl; 
 
         if (audioUrl) {
+            this.updateRecentSearch(context);
             let openUrl = this.replaceUrl(url, audioUrl);
             this.createTab(openUrl);
         }
@@ -146,6 +158,7 @@ class SearchAction extends ContextMenuAction {
         let videoUrl = onClickData.srcUrl; 
 
         if (videoUrl) {
+            this.updateRecentSearch(context);
             let openUrl = this.replaceUrl(url, videoUrl);
             this.createTab(openUrl);
         }
@@ -156,6 +169,7 @@ class SearchAction extends ContextMenuAction {
         let frameUrl = onClickData.frameUrl; 
 
         if (frameUrl) {
+            this.updateRecentSearch(context);
             let openUrl = this.replaceUrl(url, frameUrl);
             this.createTab(openUrl);
         }
@@ -254,6 +268,8 @@ class ImageBase64ConvertAction extends ContextMenuAction {
     }
 
     copy(onClickData, context) {
+        this.updateRecentSearch(context);
+
         let tempImage = new Image;
         let canvas = this.canvas;
         let canvasTempContainer = this.canvasTempContainer;
@@ -278,6 +294,8 @@ class ImageBase64ConvertAction extends ContextMenuAction {
     }
 
     open(onClickData, context) {
+        this.updateRecentSearch(context);
+
         let tempImage = new Image;
         let canvas = this.canvas;
         let canvasTempContainer = this.canvasTempContainer;
@@ -302,6 +320,8 @@ class ImageBase64ConvertAction extends ContextMenuAction {
     }
 
     download(onClickData, context) {
+        this.updateRecentSearch(context);
+
         let tempImage = new Image;
         let canvas = this.canvas;
 
