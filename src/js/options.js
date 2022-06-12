@@ -289,7 +289,7 @@ const ContentMenuItems = {
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
                     title: '巴哈姆特',
-                    url: 'https://search.gamer.com.tw/?q=${search}',
+                    url: 'https://acg.gamer.com.tw/search.php?kw=${search}',
                     iconUrl: 'https://api.faviconkit.com/ani.gamer.com.tw/64',
                     isEnable: true
                 },
