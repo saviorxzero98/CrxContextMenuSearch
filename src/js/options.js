@@ -70,12 +70,28 @@ const ContentMenuItems = {
                     url: 'https://duckduckgo.com/?q=${search}',
                     iconUrl: 'https://duckduckgo.com/favicon.ico',
                     isEnable: true
-                },
+                }
+            ],
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.folder,
+            contentType: ContextMenuType.selection,
+            title: '百科',
+            items: [
                 {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: '維基百科',
+                    title: 'Wikiwand (中文)',
+                    url: 'https://www.wikiwand.com/zh-tw/${search}',
+                    iconUrl: 'https://wikiwand-19431.kxcdn.com/favicon.ico',
+                    isEnable: true
+                },{
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: '維基百科 (中文)',
                     url: 'https://zh.wikipedia.org/w/index.php?search=${search}',
                     iconUrl: 'https://zh.wikipedia.org/static/favicon/wikipedia.ico',
                     isEnable: true
@@ -84,9 +100,18 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Wikiwand',
-                    url: 'https://www.wikiwand.com/zh-tw/${search}',
-                    iconUrl: 'https://wikiwand-19431.kxcdn.com/favicon.ico',
+                    title: '維基百科 (英文)',
+                    url: 'https://en.wikipedia.org/wiki/Special:Search?search=${search}',
+                    iconUrl: 'https://en.wikipedia.org/static/favicon/wikipedia.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: '維基百科 (日文)',
+                    url: 'https://ja.wikipedia.org/wiki/Special:Search?search=${search}',
+                    iconUrl: 'https://ja.wikipedia.org/static/favicon/wikipedia.ico',
                     isEnable: true
                 },
                 {
@@ -106,7 +131,7 @@ const ContentMenuItems = {
                     url: 'https://zh.moegirl.org.cn/index.php?search=${search}',
                     iconUrl: 'https://zh.moegirl.org.cn/favicon.ico',
                     isEnable: true
-                },
+                }
             ],
             isEnable: true
         },
@@ -175,7 +200,7 @@ const ContentMenuItems = {
         {
             itemType: ContextMenuItemType.folder,
             contentType: ContextMenuType.selection,
-            title: '圖片、影音',
+            title: '圖片',
             items: [
                 {
                     itemType: ContextMenuItemType.normal,
@@ -186,6 +211,50 @@ const ContentMenuItems = {
                     iconUrl: 'https://api.faviconkit.com/www.google.com/64',
                     isEnable: true
                 },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Bing圖片',
+                    url: 'https://www.bing.com/images/search?q=${search}',
+                    iconUrl: 'https://www.bing.com/favicon.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Yahoo奇摩!圖片',
+                    url: 'https://tw.images.search.yahoo.com/search/images;_ylt=Awrth0sQW7hiXpsxYxZr1gt.;_ylu=Y29sbwN0dzEEcG9zAzEEdnRpZAMEc2VjA3BpdnM-?p=${search}',
+                    iconUrl: 'https://s.yimg.com/rz/l/favicon.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'DuckDuckGo圖片',
+                    url: 'https://duckduckgo.com/?q=${search}&iax=images&ia=images',
+                    iconUrl: 'https://duckduckgo.com/favicon.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Yandex圖片',
+                    url: 'https://yandex.com/images/search?text=images',
+                    iconUrl: 'https://yastatic.net/images-thumbs/_/8cS_MbHl6VBweqVjWeI-eNy0tzE.ico',
+                    isEnable: true
+                }
+            ],
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.folder,
+            contentType: ContextMenuType.selection,
+            title: '影音',
+            items: [
                 {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
@@ -523,6 +592,15 @@ const ContentMenuItems = {
             title: 'Google 圖片搜尋',
             url: 'https://images.google.com/searchbyimage?image_url=${url}',
             iconUrl: 'https://api.faviconkit.com/www.google.com/64',
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.normal,
+            contentType: ContextMenuType.image,
+            action: ContextMenuActionType.search,
+            title: 'Bing 圖片搜尋',
+            url: 'https://www.bing.com/images/search?view=detailv2&iss=sbi&q=imgurl:${url}',
+            iconUrl: 'https://www.bing.com/favicon.ico',
             isEnable: true
         },
         {
