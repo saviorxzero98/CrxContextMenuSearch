@@ -153,7 +153,7 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Google翻譯 (中文)',
+                    title: 'Google 翻譯 (中文)',
                     url: 'https://translate.google.com.tw/?hl=zh-TW&sl=auto&tl=zh-TW&text=${search}',
                     iconUrl: 'https://ssl.gstatic.com/translate/favicon.ico',
                     isEnable: true
@@ -162,9 +162,18 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Bing翻譯 (中文)',
+                    title: 'Bing 翻譯 (中文)',
                     url: 'https://www.bing.com/translator/?to=zh-Hant&text=${search}',
                     iconUrl: 'https://www.bing.com/th?id=OTT.7A274AA188550691D09FA80F322A58D2&pid=Trans',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Papago 翻譯 (中文)',
+                    url: 'https://papago.naver.com/?sk=auto&tk=zh-TW&st=${search}',
+                    iconUrl: 'https://papago.naver.com/favicon.ico',
                     isEnable: true
                 },
                 {
@@ -180,7 +189,7 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Google翻譯 (英文)',
+                    title: 'Google 翻譯 (英文)',
                     url: 'https://translate.google.com.tw/?hl=zh-TW&sl=auto&tl=en&text=${search}',
                     iconUrl: 'https://ssl.gstatic.com/translate/favicon.ico',
                     isEnable: true
@@ -189,11 +198,20 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Bing翻譯 (英文)',
+                    title: 'Bing 翻譯 (英文)',
                     url: 'https://www.bing.com/translator/?to=en&text=${search}',
                     iconUrl: 'https://www.bing.com/th?id=OTT.7A274AA188550691D09FA80F322A58D2&pid=Trans',
                     isEnable: true
-                }
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Papago 翻譯 (英文)',
+                    url: 'https://papago.naver.com/?sk=auto&tk=en&st=${search}',
+                    iconUrl: 'https://papago.naver.com/favicon.ico',
+                    isEnable: true
+                },
             ],
             isEnable: true
         },
@@ -426,11 +444,12 @@ const ContentMenuItems = {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.page,
             action: ContextMenuActionType.search,
-            title: 'MSN翻譯',
+            title: 'MSN 翻譯',
             url: 'https://www.microsofttranslator.com/bv.aspx?from=&to=zh-Hant&a=${url}',
             iconUrl: 'https://www.bing.com/th?id=OTT.7A274AA188550691D09FA80F322A58D2&pid=Trans',
             isEnable: true
         },
+
         {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.page,
@@ -449,6 +468,17 @@ const ContentMenuItems = {
             iconUrl: 'https://api.faviconkit.com/www.google.com/64',
             isEnable: true
         },
+        
+        {
+            itemType: ContextMenuItemType.normal,
+            contentType: ContextMenuType.page,
+            action: ContextMenuActionType.search,
+            title: 'Papago 翻譯',
+            url: 'https://papago.naver.net/website?source=auto&target=zh-TW&url=${url}',
+            iconUrl: 'https://papago.naver.com/favicon.ico',
+            isEnable: true
+        },
+
         {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.page,
@@ -529,6 +559,16 @@ const ContentMenuItems = {
             title: 'Google 快取頁面',
             url: 'https://webcache.googleusercontent.com/search?q=cache:${url}',
             iconUrl: 'https://api.faviconkit.com/www.google.com/64',
+            isEnable: true
+        },
+
+        {
+            itemType: ContextMenuItemType.normal,
+            contentType: ContextMenuType.page,
+            action: ContextMenuActionType.search,
+            title: 'Papago 翻譯',
+            url: 'https://papago.naver.net/website?source=auto&target=zh-TW&url=${url}',
+            iconUrl: 'https://papago.naver.com/favicon.ico',
             isEnable: true
         },
         
