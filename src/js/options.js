@@ -2,12 +2,13 @@ const ContentMenuItems = {
     all: [
 
     ],
+
     selection: [
         {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.selection,
             action: ContextMenuActionType.search,
-            title: 'Google 搜尋',
+            title: 'Google',
             url: 'https://www.google.com.tw/search?q=${search}',
             iconUrl: 'https://api.faviconkit.com/www.google.com/64',
             isEnable: true
@@ -39,7 +40,7 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Google 搜尋',
+                    title: 'Google',
                     url: 'https://www.google.com.tw/search?q=${search}',
                     iconUrl: 'https://api.faviconkit.com/www.google.com/64',
                     isEnable: true
@@ -48,7 +49,7 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Bing 搜尋',
+                    title: 'Bing',
                     url: 'https://www.bing.com/search?q=${search}',
                     iconUrl: 'https://www.bing.com/favicon.ico',
                     isEnable: true
@@ -70,6 +71,15 @@ const ContentMenuItems = {
                     url: 'https://duckduckgo.com/?q=${search}',
                     iconUrl: 'https://duckduckgo.com/favicon.ico',
                     isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Startpage',
+                    url: 'https://www.startpage.com/sp/search?query=${search}&cat=web&pl=opensearch&language=english',
+                    iconUrl: 'https://www.startpage.com/sp/cdn/favicons/apple-touch-icon-57x57--default.png',
+                    isEnable: true
                 }
             ],
             isEnable: true
@@ -83,11 +93,12 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Wikiwand (中文)',
+                    title: 'Wikiwand',
                     url: 'https://www.wikiwand.com/zh-tw/${search}',
                     iconUrl: 'https://wikiwand-19431.kxcdn.com/favicon.ico',
                     isEnable: true
-                },{
+                },
+                {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
@@ -144,7 +155,7 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Yahoo!奇摩字典',
+                    title: 'Yahoo!奇摩 字典',
                     url: 'https://tw.dictionary.search.yahoo.com/search?p=${search}&amp;fr=opensearch',
                     iconUrl: 'https://s.yimg.com/rz/l/favicon.ico',
                     isEnable: true
@@ -211,7 +222,7 @@ const ContentMenuItems = {
                     url: 'https://papago.naver.com/?sk=auto&tk=en&st=${search}',
                     iconUrl: 'https://papago.naver.com/favicon.ico',
                     isEnable: true
-                },
+                }
             ],
             isEnable: true
         },
@@ -224,7 +235,7 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Google圖片',
+                    title: 'Google 圖片',
                     url: 'https://www.google.com/images?q=${search}',
                     iconUrl: 'https://api.faviconkit.com/www.google.com/64',
                     isEnable: true
@@ -233,7 +244,7 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Bing圖片',
+                    title: 'Bing 圖片',
                     url: 'https://www.bing.com/images/search?q=${search}',
                     iconUrl: 'https://www.bing.com/favicon.ico',
                     isEnable: true
@@ -242,7 +253,7 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Yahoo奇摩!圖片',
+                    title: 'Yahoo奇摩! 圖片',
                     url: 'https://tw.images.search.yahoo.com/search/images;_ylt=Awrth0sQW7hiXpsxYxZr1gt.;_ylu=Y29sbwN0dzEEcG9zAzEEdnRpZAMEc2VjA3BpdnM-?p=${search}',
                     iconUrl: 'https://s.yimg.com/rz/l/favicon.ico',
                     isEnable: true
@@ -251,7 +262,7 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'DuckDuckGo圖片',
+                    title: 'DuckDuckGo 圖片',
                     url: 'https://duckduckgo.com/?q=${search}&iax=images&ia=images',
                     iconUrl: 'https://duckduckgo.com/favicon.ico',
                     isEnable: true
@@ -260,10 +271,19 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Yandex圖片',
+                    title: 'Startpage 圖片',
+                    url: 'https://www.startpage.com/sp/search?query=${search}&cat=images&pl=opensearch&language=english',
+                    iconUrl: 'https://www.startpage.com/sp/cdn/favicons/apple-touch-icon-57x57--default.png',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Yandex 圖片',
                     url: 'https://yandex.com/images/search?text=images',
                     iconUrl: 'https://yastatic.net/images-thumbs/_/8cS_MbHl6VBweqVjWeI-eNy0tzE.ico',
-                    isEnable: true
+                    isEnable: false
                 }
             ],
             isEnable: true
@@ -444,12 +464,11 @@ const ContentMenuItems = {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.page,
             action: ContextMenuActionType.search,
-            title: 'MSN 翻譯',
+            title: 'Bing 網頁翻譯',
             url: 'https://www.microsofttranslator.com/bv.aspx?from=&to=zh-Hant&a=${url}',
             iconUrl: 'https://www.bing.com/th?id=OTT.7A274AA188550691D09FA80F322A58D2&pid=Trans',
             isEnable: true
         },
-
         {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.page,
@@ -473,7 +492,7 @@ const ContentMenuItems = {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.page,
             action: ContextMenuActionType.search,
-            title: 'Papago 翻譯',
+            title: 'Papago 網頁翻譯',
             url: 'https://papago.naver.net/website?source=auto&target=zh-TW&url=${url}',
             iconUrl: 'https://papago.naver.com/favicon.ico',
             isEnable: true
@@ -538,7 +557,7 @@ const ContentMenuItems = {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.link,
             action: ContextMenuActionType.search,
-            title: 'MSN翻譯',
+            title: 'Bing 網頁翻譯',
             url: 'https://www.microsofttranslator.com/bv.aspx?from=&to=zh-Hant&a=${url}',
             iconUrl: 'https://www.bing.com/th?id=OTT.7A274AA188550691D09FA80F322A58D2&pid=Trans',
             isEnable: true
@@ -566,7 +585,7 @@ const ContentMenuItems = {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.page,
             action: ContextMenuActionType.search,
-            title: 'Papago 翻譯',
+            title: 'Papago 網頁翻譯',
             url: 'https://papago.naver.net/website?source=auto&target=zh-TW&url=${url}',
             iconUrl: 'https://papago.naver.com/favicon.ico',
             isEnable: true
@@ -610,6 +629,15 @@ const ContentMenuItems = {
                     url: 'https://www.urlvoid.com/scan/${domain}',
                     iconUrl: 'https://www.urlvoid.com/favicon.ico',
                     isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.link,
+                    action: ContextMenuActionType.search,
+                    title: 'Urivoid',
+                    url: 'https://www.urlvoid.com/scan/${domain}',
+                    iconUrl: 'https://www.urlvoid.com/favicon.ico',
+                    isEnable: true
                 }
             ],
             isEnable: true
@@ -629,7 +657,7 @@ const ContentMenuItems = {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.image,
             action: ContextMenuActionType.search,
-            title: 'Google 圖片搜尋',
+            title: 'Google 圖片',
             url: 'https://images.google.com/searchbyimage?image_url=${url}',
             iconUrl: 'https://api.faviconkit.com/www.google.com/64',
             isEnable: true
@@ -638,7 +666,7 @@ const ContentMenuItems = {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.image,
             action: ContextMenuActionType.search,
-            title: 'Bing 圖片搜尋',
+            title: 'Bing 圖片',
             url: 'https://www.bing.com/images/search?view=detailv2&iss=sbi&q=imgurl:${url}',
             iconUrl: 'https://www.bing.com/favicon.ico',
             isEnable: true
@@ -647,7 +675,7 @@ const ContentMenuItems = {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.image,
             action: ContextMenuActionType.search,
-            title: 'TinEye 圖片搜尋',
+            title: 'TinEye 圖片',
             url: 'https://www.tineye.com/search?url=${url}',
             iconUrl: 'https://tineye.com/favicon.ico',
             isEnable: true
@@ -656,7 +684,7 @@ const ContentMenuItems = {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.image,
             action: ContextMenuActionType.search,
-            title: 'Yandex 圖片搜尋',
+            title: 'Yandex 圖片',
             url: 'https://yandex.com/images/search?rpt=imageview&url=${url}',
             iconUrl: 'https://yastatic.net/images-thumbs/_/8cS_MbHl6VBweqVjWeI-eNy0tzE.ico',
             isEnable: true
