@@ -467,7 +467,7 @@ const ContentMenuItems = {
             title: 'Bing 網頁翻譯',
             url: 'https://www.microsofttranslator.com/bv.aspx?from=&to=zh-Hant&a=${url}',
             iconUrl: 'https://www.bing.com/th?id=OTT.7A274AA188550691D09FA80F322A58D2&pid=Trans',
-            isEnable: true
+            isEnable: false
         },
         {
             itemType: ContextMenuItemType.normal,
@@ -657,8 +657,16 @@ const ContentMenuItems = {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.image,
             action: ContextMenuActionType.search,
-            title: 'Google 圖片',
+            title: 'Google 圖片 (Old)',
             url: 'https://images.google.com/searchbyimage?image_url=${url}',
+            iconUrl: 'https://api.faviconkit.com/www.google.com/64',
+            isEnable: false
+        },{
+            itemType: ContextMenuItemType.normal,
+            contentType: ContextMenuType.image,
+            action: ContextMenuActionType.googleImageReverseSearch,
+            title: 'Google 圖片',
+            url: '',
             iconUrl: 'https://api.faviconkit.com/www.google.com/64',
             isEnable: true
         },

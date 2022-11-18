@@ -1,6 +1,7 @@
 const ContextMenuActionType = {
     search: 'search',
     base64Image: 'base64_image',
+    googleImageReverseSearch: 'google_image_reverse_search',
     chineseConvert: 'chinese_convert'
 };
 
@@ -44,6 +45,9 @@ const ContextMenuActionFactory = {
 
                 case ContextMenuActionType.base64Image:
                     return new ImageBase64ConvertAction();
+
+                case ContextMenuActionType.googleImageReverseSearch:
+                    return new GoogleImageReverseSearchAction();
 
                 case ContextMenuActionType.ChineseConvertAction:
                     return new ChineseConvertAction();
@@ -349,6 +353,88 @@ class ImageBase64ConvertAction extends ContextMenuAction {
         }
     }
 }
+
+//--------------------------------------------------
+
+class GoogleImageReverseSearchAction extends ContextMenuAction {
+    constructor() {
+        super();
+        this.canvas = document.createElement('canvas');
+        this.canvasTempContainer = document.createElement('textarea');
+    }
+
+    execute(onClickData, context) {
+        this.updateRecentSearch(context);
+
+        let self = this;
+        let tempImage = new Image;
+        let canvas = this.canvas;
+
+        tempImage.src = onClickData.srcUrl;
+
+        tempImage.onload = () =>
+        {
+            canvas.width = tempImage.width;
+            canvas.height = tempImage.height;
+            
+            let canvasContext = canvas.getContext('2d');
+            canvasContext.drawImage(tempImage, 0, 0);
+    
+            let dataUrl = canvas.toDataURL();
+            
+            let blob = new Blob([ self.dataUrlToArray(dataUrl) ], { type: self.getDataUrlMimeType(dataUrl) });
+
+            const data = new FormData();
+            data.append('encoded_image', blob, 'Image.jpg');
+
+            axios.post('https://www.google.com/searchbyimage/upload', data)
+                 .then((resp) => {
+                    let searchUrl = '';
+                    if (resp && resp.status == 200 && resp.request && resp.request.responseURL) {
+                        searchUrl = resp.request.responseURL;
+                    }
+                    else {
+                        searchUrl = `https://images.google.com/searchbyimage?image_url=${onClickData.srcUrl}`;
+                    }
+
+                    chrome.tabs.create(
+                        {
+                            url: searchUrl
+                        }
+                    );
+                 });
+        }
+    }
+
+    dataUrlToArray(dataUrl) {
+        const [meta, data] = dataUrl.split(',');
+        let byteString;
+
+        if (meta.endsWith(';base64')) {
+            byteString = atob(data);
+        } 
+        else {
+            byteString = unescape(data);
+        }
+        const length = byteString.length;
+
+        const array = new Uint8Array(new ArrayBuffer(length));
+        for (let i = 0; i < length; i++) {
+            array[i] = byteString.charCodeAt(i);
+        }
+
+        return array;
+    }
+
+    getDataUrlMimeType(dataUrl) {
+        return dataUrl.slice(0, 100)
+                      .split(',')[0]
+                      .split(':')[1]
+                      .split(';')[0]
+                      .toLowerCase();
+    }
+}
+
 
 //--------------------------------------------------
 
