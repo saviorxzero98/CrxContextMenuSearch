@@ -366,44 +366,54 @@ class GoogleImageReverseSearchAction extends ContextMenuAction {
     execute(onClickData, context) {
         this.updateRecentSearch(context);
 
-        let self = this;
-        let tempImage = new Image;
-        let canvas = this.canvas;
+        chrome.tabs.create(
+            {
+                url: chrome.extension.getURL('html/loading.html')
+            },
+            (tab) => {
+                console.log(tab.id);
 
-        tempImage.src = onClickData.srcUrl;
+                let self = this;
+                let tempImage = new Image;
+                let canvas = this.canvas;
 
-        tempImage.onload = () =>
-        {
-            canvas.width = tempImage.width;
-            canvas.height = tempImage.height;
+                tempImage.src = onClickData.srcUrl;
+
+                tempImage.onload = () =>
+                {
+                    canvas.width = tempImage.width;
+                    canvas.height = tempImage.height;
+                    
+                    let canvasContext = canvas.getContext('2d');
+                    canvasContext.drawImage(tempImage, 0, 0);
             
-            let canvasContext = canvas.getContext('2d');
-            canvasContext.drawImage(tempImage, 0, 0);
-    
-            let dataUrl = canvas.toDataURL();
-            
-            let blob = new Blob([ self.dataUrlToArray(dataUrl) ], { type: self.getDataUrlMimeType(dataUrl) });
+                    let dataUrl = canvas.toDataURL();
+                    
+                    let blob = new Blob([ self.dataUrlToArray(dataUrl) ], { type: self.getDataUrlMimeType(dataUrl) });
 
-            const data = new FormData();
-            data.append('encoded_image', blob, 'Image.jpg');
+                    const data = new FormData();
+                    data.append('encoded_image', blob, 'Image.jpg');
 
-            axios.post('https://www.google.com/searchbyimage/upload', data)
-                 .then((resp) => {
-                    let searchUrl = '';
-                    if (resp && resp.status == 200 && resp.request && resp.request.responseURL) {
-                        searchUrl = resp.request.responseURL;
-                    }
-                    else {
-                        searchUrl = `https://images.google.com/searchbyimage?image_url=${onClickData.srcUrl}`;
-                    }
+                    axios.post('https://www.google.com/searchbyimage/upload', data)
+                        .then((resp) => {
+                            let searchUrl = '';
+                            if (resp && resp.status == 200 && resp.request && resp.request.responseURL) {
+                                searchUrl = resp.request.responseURL;
+                            }
+                            else {
+                                searchUrl = `https://images.google.com/searchbyimage?image_url=${onClickData.srcUrl}`;
+                            }
 
-                    chrome.tabs.create(
-                        {
-                            url: searchUrl
-                        }
-                    );
-                 });
-        }
+                            chrome.tabs.update(
+                                tab.id,
+                                {
+                                    url: searchUrl
+                                }
+                            );
+                        });
+                }
+            }
+        );
     }
 
     dataUrlToArray(dataUrl) {
