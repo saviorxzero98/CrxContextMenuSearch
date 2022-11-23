@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<!---------- JQuery Script ---------->
+		<script src="../lib/jquery/jquery-1.9.1.min.js"></script>
+		<script src="../lib/EzJS/EzDateTime.js"></script>
+        <script src="../lib/EzJS/EzCollection.js"></script>
+        <script src="../lib/EzJS/EzUriManager.js"></script>
+		<script>
+        $(document).ready(function () {
+			window.onload = function () {
+				var parameter = UriManager.parseGetUrl(window.location.search);
+				if(parameter.get("url") != null ) {
+					window.location = parameter.get("url");
+				}
+			}
+		});
+		</script>
+	</head>
+	<body>
+		<div style="position:relative; width:100%; height:100%; text-align:center; vertical-align:middle;">
+			<img src="image/loading-blue.gif" style="position:absolute; width:100px;  top:0; bottom:0; left:0; right:0; margin:auto;" />
+		</div>
+	</body>
+</html>
