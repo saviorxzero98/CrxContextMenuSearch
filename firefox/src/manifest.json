@@ -1,14 +1,20 @@
 {
     "manifest_version": 2,
-    "name": "Chrome Context Menu Search",
-    "description": "Chrome 右鍵選單搜尋工具",
+    "name": "Firefox Context Menu Search",
+    "description": "Firefox 右鍵選單搜尋工具",
     "version": "1.1.4",
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "my_addon@example.com",
+            "strict_min_version": "48.0"
+        }
+    },
     "icons":
-	{
-		"128": "icon/128.png",
-		"16": "icon/16.png",
-		"48": "icon/48.png"
-	},
+    {
+        "128": "icon/128.png",
+        "16": "icon/16.png",
+        "48": "icon/48.png"
+    },
     "permissions": [
         "contextMenus",
         "tabs",
