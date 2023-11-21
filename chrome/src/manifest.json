@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Chrome Context Menu Search",
     "description": "Chrome 右鍵選單搜尋工具",
-    "version": "1.1.4",
+    "version": "1.2.0",
     "icons":
 	{
 		"128": "icon/128.png",

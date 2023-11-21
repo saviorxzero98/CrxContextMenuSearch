@@ -239,6 +239,54 @@ class SearchAction extends ContextMenuAction {
 }
 
 //--------------------------------------------------
+const ImageConvertHelper = {
+    toBase64UrlByCanvas: (canvas, srcUrl, callback) => {
+        let tempImage = new Image;
+        tempImage.src = srcUrl ?? '';
+        tempImage.onload = () => {
+            canvas.width = tempImage.width;
+            canvas.height = tempImage.height;
+            
+            let canvasContext = canvas.getContext('2d');
+            canvasContext.drawImage(tempImage, 0, 0);
+    
+            let base64Url = canvas.toDataURL();
+
+            if (callback && typeof callback === 'function') {
+                callback(base64Url);
+            }
+        }
+    },
+
+    dataUrlToArray: (dataUrl) => {
+        const [meta, data] = dataUrl.split(',');
+        let byteString;
+
+        if (meta.endsWith(';base64')) {
+            byteString = atob(data);
+        } 
+        else {
+            byteString = unescape(data);
+        }
+        const length = byteString.length;
+
+        const array = new Uint8Array(new ArrayBuffer(length));
+        for (let i = 0; i < length; i++) {
+            array[i] = byteString.charCodeAt(i);
+        }
+
+        return array;
+    },
+
+    getDataUrlMimeType: (dataUrl) => {
+        return dataUrl.slice(0, 100)
+                      .split(',')[0]
+                      .split(':')[1]
+                      .split(';')[0]
+                      .toLowerCase();
+    }
+}
+
 
 const ImageBase64ConvertActionCommandType = {
     copy: 'copy',
@@ -274,83 +322,45 @@ class ImageBase64ConvertAction extends ContextMenuAction {
     copy(onClickData, context) {
         this.updateRecentSearch(context);
 
-        let tempImage = new Image;
-        let canvas = this.canvas;
         let canvasTempContainer = this.canvasTempContainer;
+        let canvas = this.canvas;
+        let srcUrl = onClickData.srcUrl;
 
-        tempImage.src = onClickData.srcUrl;
-        tempImage.onload = () =>
-        {
-            canvas.width = tempImage.width;
-            canvas.height = tempImage.height;
-            
-            let canvasContext = canvas.getContext('2d');
-            canvasContext.drawImage(tempImage, 0, 0);
-    
-            canvasTempContainer.textContent = canvas.toDataURL();
+        ImageConvertHelper.toBase64UrlByCanvas(canvas, srcUrl, (base64Url) => {
+            canvasTempContainer.textContent = base64Url;
             document.body.appendChild(canvasTempContainer);
             canvasTempContainer.select();
-    
-            chrome.extension.getBackgroundPage().console.log(canvasTempContainer.textContent);
             document.execCommand('copy');
             document.body.removeChild(canvasTempContainer);
-        }
+        });
     }
 
     open(onClickData, context) {
         this.updateRecentSearch(context);
 
-        let tempImage = new Image;
         let canvas = this.canvas;
-        let canvasTempContainer = this.canvasTempContainer;
+        let srcUrl = onClickData.srcUrl;
 
-        tempImage.src = onClickData.srcUrl;
-        tempImage.onload = () =>
-        {
-            canvas.width = tempImage.width;
-            canvas.height = tempImage.height;
-            
-            let canvasContext = canvas.getContext('2d');
-            canvasContext.drawImage(tempImage, 0, 0);
-    
-            let base64Url = canvas.toDataURL();
-
-            chrome.tabs.create(
-                {
-                    url: base64Url
-                }
-            );
-        }
+        ImageConvertHelper.toBase64UrlByCanvas(canvas, srcUrl, (base64Url) => {
+            chrome.tabs.create({ url: base64Url });
+        });
     }
 
     download(onClickData, context) {
         this.updateRecentSearch(context);
 
-        let tempImage = new Image;
         let canvas = this.canvas;
+        let srcUrl = onClickData.srcUrl;
 
-        tempImage.src = onClickData.srcUrl;
-        tempImage.onload = () =>
-        {
-            canvas.width = tempImage.width;
-            canvas.height = tempImage.height;
-            
-            let canvasContext = canvas.getContext('2d');
-            canvasContext.drawImage(tempImage, 0, 0);
-    
-            let base64Url = canvas.toDataURL();
-
+        ImageConvertHelper.toBase64UrlByCanvas(canvas, srcUrl, (base64Url) => {
             chrome.downloads.download(
                 {
                     url: base64Url,
                     saveAs: true,
                     method: "GET"
                 }, 
-                (downloadId) => {
-                    console.log(downloadId); 
-                }
             );
-        }
+        });
     }
 }
 
@@ -364,6 +374,13 @@ class GoogleImageReverseSearchAction extends ContextMenuAction {
     }
 
     execute(onClickData, context) {
+        this.imageReverseSearch(onClickData);
+    }
+
+    /**
+     * @deprecated
+     */
+    imageReverseSearch(onClickData, context) {
         this.updateRecentSearch(context);
 
         chrome.tabs.create(
@@ -371,25 +388,16 @@ class GoogleImageReverseSearchAction extends ContextMenuAction {
                 url: chrome.extension.getURL('html/loading.html')
             },
             (tab) => {
-                console.log(tab.id);
-
-                let self = this;
-                let tempImage = new Image;
                 let canvas = this.canvas;
+                let srcUrl =  onClickData.srcUrl;
 
-                tempImage.src = onClickData.srcUrl;
-
-                tempImage.onload = () =>
-                {
-                    canvas.width = tempImage.width;
-                    canvas.height = tempImage.height;
-                    
-                    let canvasContext = canvas.getContext('2d');
-                    canvasContext.drawImage(tempImage, 0, 0);
-            
-                    let dataUrl = canvas.toDataURL();
-                    
-                    let blob = new Blob([ self.dataUrlToArray(dataUrl) ], { type: self.getDataUrlMimeType(dataUrl) });
+                ImageConvertHelper.toBase64UrlByCanvas(canvas, srcUrl, (base64Url) => {
+                    let blob = new Blob([ 
+                        ImageConvertHelper.dataUrlToArray(base64Url) 
+                    ], 
+                    { 
+                        type: ImageConvertHelper.getDataUrlMimeType(base64Url) 
+                    });
 
                     const data = new FormData();
                     data.append('encoded_image', blob, 'Image.jpg');
@@ -411,37 +419,9 @@ class GoogleImageReverseSearchAction extends ContextMenuAction {
                                 }
                             );
                         });
-                }
+                })
             }
         );
-    }
-
-    dataUrlToArray(dataUrl) {
-        const [meta, data] = dataUrl.split(',');
-        let byteString;
-
-        if (meta.endsWith(';base64')) {
-            byteString = atob(data);
-        } 
-        else {
-            byteString = unescape(data);
-        }
-        const length = byteString.length;
-
-        const array = new Uint8Array(new ArrayBuffer(length));
-        for (let i = 0; i < length; i++) {
-            array[i] = byteString.charCodeAt(i);
-        }
-
-        return array;
-    }
-
-    getDataUrlMimeType(dataUrl) {
-        return dataUrl.slice(0, 100)
-                      .split(',')[0]
-                      .split(':')[1]
-                      .split(';')[0]
-                      .toLowerCase();
     }
 }
 

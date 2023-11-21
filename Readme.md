@@ -6,7 +6,13 @@
 
 ## Usage
 
-* 由於使用 Chrome Manifest v2 開發的，因此建議安裝在 Vivaldi、Brave、Cent Broswer 等第三方的 Chromium 瀏覽器
+* 為 Chrome Manifest v2
+* Chromium 瀏覽器
+    *  Vivaldi
+    * Brave
+    * Cent Broswer
+* Firefox 瀏覽器
+    * Waterfox
 
 ## Screenshot
 
