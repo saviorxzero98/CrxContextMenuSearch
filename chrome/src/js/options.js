@@ -149,17 +149,8 @@ const ContentMenuItems = {
         {
             itemType: ContextMenuItemType.folder,
             contentType: ContextMenuType.selection,
-            title: '翻譯與辭典',
+            title: '翻譯',
             items: [
-                {
-                    itemType: ContextMenuItemType.normal,
-                    contentType: ContextMenuType.selection,
-                    action: ContextMenuActionType.search,
-                    title: 'Yahoo!奇摩 字典',
-                    url: 'https://tw.dictionary.search.yahoo.com/search?p=${search}&amp;fr=opensearch',
-                    iconUrl: 'https://s.yimg.com/rz/l/favicon.ico',
-                    isEnable: true
-                },
                 {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
@@ -167,6 +158,15 @@ const ContentMenuItems = {
                     title: 'Google 翻譯 (中文)',
                     url: 'https://translate.google.com.tw/?hl=zh-TW&sl=auto&tl=zh-TW&text=${search}',
                     iconUrl: 'https://ssl.gstatic.com/translate/favicon.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'DeepL 翻譯 (中文)',
+                    url: 'https://www.deepl.com/en/translator#en/zh-hant/${search}',
+                    iconUrl: 'https://static.deepl.com/img/favicon/favicon_32.png',
                     isEnable: true
                 },
                 {
@@ -191,18 +191,18 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: '維基辭典',
-                    url: 'https://zh.wiktionary.org/zh-hant/{search}',
-                    iconUrl: 'https://zh.wiktionary.org/static/favicon/piece.ico',
+                    title: 'Google 翻譯 (英文)',
+                    url: 'https://translate.google.com.tw/?hl=zh-TW&sl=auto&tl=en&text=${search}',
+                    iconUrl: 'https://ssl.gstatic.com/translate/favicon.ico',
                     isEnable: true
                 },
                 {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Google 翻譯 (英文)',
-                    url: 'https://translate.google.com.tw/?hl=zh-TW&sl=auto&tl=en&text=${search}',
-                    iconUrl: 'https://ssl.gstatic.com/translate/favicon.ico',
+                    title: 'DeepL 翻譯 (英文)',
+                    url: 'https://www.deepl.com/en/translator#zh/en-us/${search}',
+                    iconUrl: 'https://static.deepl.com/img/favicon/favicon_32.png',
                     isEnable: true
                 },
                 {
@@ -221,6 +221,32 @@ const ContentMenuItems = {
                     title: 'Papago 翻譯 (英文)',
                     url: 'https://papago.naver.com/?sk=auto&tk=en&st=${search}',
                     iconUrl: 'https://papago.naver.com/favicon.ico',
+                    isEnable: true
+                }
+            ],
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.folder,
+            contentType: ContextMenuType.selection,
+            title: '辭典',
+            items: [
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Yahoo!奇摩 字典',
+                    url: 'https://tw.dictionary.search.yahoo.com/search?p=${search}&amp;fr=opensearch',
+                    iconUrl: 'https://s.yimg.com/rz/l/favicon.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: '維基辭典',
+                    url: 'https://zh.wiktionary.org/zh-hant/{search}',
+                    iconUrl: 'https://zh.wiktionary.org/static/favicon/piece.ico',
                     isEnable: true
                 }
             ],
