@@ -17,9 +17,27 @@ const ContentMenuItems = {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.selection,
             action: ContextMenuActionType.search,
+            title: 'Bing',
+            url: 'https://www.bing.com/search?q=${search}',
+            iconUrl: 'https://www.bing.com/favicon.ico',
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.normal,
+            contentType: ContextMenuType.selection,
+            action: ContextMenuActionType.search,
             title: 'DuckDuckGo',
             url: 'https://duckduckgo.com/?q=${search}',
             iconUrl: 'https://duckduckgo.com/favicon.ico',
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.normal,
+            contentType: ContextMenuType.selection,
+            action: ContextMenuActionType.search,
+            title: 'Brave',
+            url: 'https://search.brave.com/search?q=${search}&source=web',
+            iconUrl: 'https://cdn.search.brave.com/serp/v2/_app/immutable/assets/favicon-32x32.86083f5b.png',
             isEnable: true
         },
         {
@@ -76,18 +94,18 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Startpage',
-                    url: 'https://www.startpage.com/sp/search?query=${search}&cat=web&pl=opensearch&language=english',
-                    iconUrl: 'https://www.startpage.com/sp/cdn/favicons/apple-touch-icon-57x57--default.png',
+                    title: 'Brave',
+                    url: 'https://search.brave.com/search?q=${search}&source=web',
+                    iconUrl: 'https://cdn.search.brave.com/serp/v2/_app/immutable/assets/favicon-32x32.86083f5b.png',
                     isEnable: true
                 },
                 {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Brave',
-                    url: 'https://search.brave.com/search?q=${search}',
-                    iconUrl: 'https://cdn.search.brave.com/serp/v2/_app/immutable/assets/favicon-32x32.86083f5b.png',
+                    title: 'Startpage',
+                    url: 'https://www.startpage.com/sp/search?query=${search}&cat=web&pl=opensearch&language=english',
+                    iconUrl: 'https://www.startpage.com/sp/cdn/favicons/apple-touch-icon-57x57--default.png',
                     isEnable: true
                 }
             ],
@@ -123,15 +141,6 @@ const ContentMenuItems = {
                     title: '維基百科 (日文)',
                     url: 'https://ja.wikipedia.org/wiki/Special:Search?search=${search}',
                     iconUrl: 'https://ja.wikipedia.org/static/favicon/wikipedia.ico',
-                    isEnable: true
-                },
-                {
-                    itemType: ContextMenuItemType.normal,
-                    contentType: ContextMenuType.selection,
-                    action: ContextMenuActionType.search,
-                    title: 'Komica Wiki',
-                    url: 'https://wiki.komica.org/index.php?search=${search}',
-                    iconUrl: 'https://wiki.komica.org/images/thumb/5/56/Wikigirl.png/450px-Wikigirl.png',
                     isEnable: true
                 },
                 {
@@ -297,18 +306,18 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Startpage 圖片',
-                    url: 'https://www.startpage.com/sp/search?query=${search}&cat=images&pl=opensearch&language=english',
-                    iconUrl: 'https://www.startpage.com/sp/cdn/favicons/apple-touch-icon-57x57--default.png',
+                    title: 'Brave 圖片',
+                    url: 'https://search.brave.com/images?q=${search}&source=web',
+                    iconUrl: 'https://cdn.search.brave.com/serp/v2/_app/immutable/assets/favicon-32x32.86083f5b.png',
                     isEnable: true
                 },
                 {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Brave 圖片',
-                    url: 'https://search.brave.com/images?q=${search}',
-                    iconUrl: 'https://cdn.search.brave.com/serp/v2/_app/immutable/assets/favicon-32x32.86083f5b.png',
+                    title: 'Startpage 圖片',
+                    url: 'https://www.startpage.com/sp/search?query=${search}&cat=images&pl=opensearch&language=english',
+                    iconUrl: 'https://www.startpage.com/sp/cdn/favicons/apple-touch-icon-57x57--default.png',
                     isEnable: true
                 },
                 {
@@ -359,7 +368,7 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'ofiii',
+                    title: 'Ofiii',
                     url: 'https://www.ofiii.com/search/${search}',
                     iconUrl: 'https://www.ofiii.com/favicon.ico',
                     isEnable: true
@@ -368,7 +377,7 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'bilibili',
+                    title: 'BiliBili',
                     url: 'https://search.bilibili.com/all?keyword=${search}',
                     iconUrl: 'https://www.bilibili.com/favicon.ico',
                     isEnable: true
@@ -521,7 +530,7 @@ const ContentMenuItems = {
             title: 'Papago 網頁翻譯',
             url: 'https://papago.naver.net/website?source=auto&target=zh-TW&url=${url}',
             iconUrl: 'https://papago.naver.com/favicon.ico',
-            isEnable: true
+            isEnable: false
         },
 
         {
@@ -586,7 +595,7 @@ const ContentMenuItems = {
             title: 'Bing 網頁翻譯',
             url: 'https://www.microsofttranslator.com/bv.aspx?from=&to=zh-Hant&a=${url}',
             iconUrl: 'https://www.bing.com/th?id=OTT.7A274AA188550691D09FA80F322A58D2&pid=Trans',
-            isEnable: true
+            isEnable: false
         },
         {
             itemType: ContextMenuItemType.normal,
@@ -614,7 +623,7 @@ const ContentMenuItems = {
             title: 'Papago 網頁翻譯',
             url: 'https://papago.naver.net/website?source=auto&target=zh-TW&url=${url}',
             iconUrl: 'https://papago.naver.com/favicon.ico',
-            isEnable: true
+            isEnable: false
         },
         
         {
