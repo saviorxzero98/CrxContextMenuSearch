@@ -10,7 +10,7 @@ const ContentMenuItems = {
             action: ContextMenuActionType.search,
             title: 'Google',
             url: 'https://www.google.com.tw/search?q=${search}',
-            iconUrl: 'https://api.faviconkit.com/www.google.com/64',
+            iconUrl: 'https://www.google.com/favicon.ico',
             isEnable: true
         },
         {
@@ -35,15 +35,6 @@ const ContentMenuItems = {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.selection,
             action: ContextMenuActionType.search,
-            title: 'Brave',
-            url: 'https://search.brave.com/search?q=${search}&source=web',
-            iconUrl: 'https://cdn.search.brave.com/serp/v2/_app/immutable/assets/favicon-32x32.86083f5b.png',
-            isEnable: true
-        },
-        {
-            itemType: ContextMenuItemType.normal,
-            contentType: ContextMenuType.selection,
-            action: ContextMenuActionType.search,
             title: '維基百科',
             url: 'https://zh.wikipedia.org/w/index.php?search=${search}',
             iconUrl: 'https://api.faviconkit.com/zh.wikipedia.org/64',
@@ -60,7 +51,7 @@ const ContentMenuItems = {
                     action: ContextMenuActionType.search,
                     title: 'Google',
                     url: 'https://www.google.com.tw/search?q=${search}',
-                    iconUrl: 'https://api.faviconkit.com/www.google.com/64',
+                    iconUrl: 'https://www.google.com/favicon.ico',
                     isEnable: true
                 },
                 {
@@ -107,6 +98,77 @@ const ContentMenuItems = {
                     url: 'https://www.startpage.com/sp/search?query=${search}&cat=web&pl=opensearch&language=english',
                     iconUrl: 'https://www.startpage.com/sp/cdn/favicons/apple-touch-icon-57x57--default.png',
                     isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Norton安全搜尋',
+                    url: 'https://nortonsafe.search.ask.com/web?q=${search}',
+                    iconUrl: 'https://nortonsafe.search.ask.com/favicon.ico',
+                    isEnable: true
+                }
+            ],
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.folder,
+            contentType: ContextMenuType.selection,
+            title: 'AI 搜尋',
+            items: [
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Bing AI 搜尋',
+                    url: 'https://www.bing.com/search?q=${search}&shm=cr&form=DEEPSH',
+                    iconUrl: 'https://www.bing.com/favicon.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Brave Leo AI 搜尋',
+                    url: 'https://search.brave.com/search?q=${search}&source=web&summary=1',
+                    iconUrl: 'https://cdn.search.brave.com/serp/v2/_app/immutable/assets/favicon-32x32.B2iBzfXZ.png',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'ChatGPT',
+                    url: 'https://chatgpt.com/?q=${search}',
+                    iconUrl: 'https://cdn.oaistatic.com/assets/favicon-miwirzcw.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Perplexity AI',
+                    url: 'https://www.perplexity.ai/search?q=${search}',
+                    iconUrl: 'https://www.perplexity.ai/favicon.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Claude AI',
+                    url: 'https://claude.ai/new?q=${search}',
+                    iconUrl: 'https://claude.ai/images/claude_app_icon.png',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Duck AI',
+                    url: 'https://duckduckgo.com/?&ia=chat&bang=true&q=${search}',
+                    iconUrl: 'https://cdn.search.brave.com/serp/v2/_app/immutable/assets/favicon-32x32.B2iBzfXZ.png',
+                    isEnable: true
                 }
             ],
             isEnable: true
@@ -151,6 +213,15 @@ const ContentMenuItems = {
                     url: 'https://zh.moegirl.org.cn/index.php?search=${search}',
                     iconUrl: 'https://zh.moegirl.org.cn/favicon.ico',
                     isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: '巴哈姆特 ACG 資料庫',
+                    url: 'https://acg.gamer.com.tw/search.php?kw=${search}',
+                    iconUrl: 'https://i2.bahamut.com.tw/favicon.svg',
+                    isEnable: true
                 }
             ],
             isEnable: true
@@ -176,6 +247,15 @@ const ContentMenuItems = {
                     title: 'DeepL 翻譯 (中文)',
                     url: 'https://www.deepl.com/en/translator#en/zh-hant/${search}',
                     iconUrl: 'https://static.deepl.com/img/favicon/favicon_32.png',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'ChatGPT 翻譯 (中文)',
+                    url: 'https://chatgpt.com/?q=將這一句翻譯成繁體中文 "${search}"',
+                    iconUrl: 'https://cdn.oaistatic.com/assets/favicon-miwirzcw.ico',
                     isEnable: true
                 },
                 {
@@ -218,6 +298,15 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
+                    title: 'ChatGPT 翻譯 (英文)',
+                    url: 'https://chatgpt.com/?q=將這一句翻譯成英文 "${search}"',
+                    iconUrl: 'https://cdn.oaistatic.com/assets/favicon-miwirzcw.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
                     title: 'Bing 翻譯 (英文)',
                     url: 'https://www.bing.com/translator/?to=en&text=${search}',
                     iconUrl: 'https://www.bing.com/th?id=OTT.7A274AA188550691D09FA80F322A58D2&pid=Trans',
@@ -231,6 +320,24 @@ const ContentMenuItems = {
                     url: 'https://papago.naver.com/?sk=auto&tk=en&st=${search}',
                     iconUrl: 'https://papago.naver.com/favicon.ico',
                     isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Yandex 翻譯 (英文)',
+                    url: 'https://translate.yandex.com/?source_lang=zh&target_lang=en&text=${search}',
+                    iconUrl: 'https://translate.yandex.com/icons/favicon.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'ChatGPT (文法檢查)',
+                    url: 'https://chatgpt.com/?q=幫我檢查這一句的文法，如果文法不正確請幫我修正 "${search}"',
+                    iconUrl: 'https://cdn.oaistatic.com/assets/favicon-miwirzcw.ico',
+                    isEnable: true
                 }
             ],
             isEnable: true
@@ -238,7 +345,7 @@ const ContentMenuItems = {
         {
             itemType: ContextMenuItemType.folder,
             contentType: ContextMenuType.selection,
-            title: '辭典',
+            title: '字典',
             items: [
                 {
                     itemType: ContextMenuItemType.normal,
@@ -257,6 +364,15 @@ const ContentMenuItems = {
                     url: 'https://zh.wiktionary.org/zh-hant/{search}',
                     iconUrl: 'https://zh.wiktionary.org/static/favicon/piece.ico',
                     isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Dr.Eye譯典通',
+                    url: 'https://www.dreye.com/ews/${search}--01--.html',
+                    iconUrl: 'https://www.dreye.com/favicon.ico',
+                    isEnable: true
                 }
             ],
             isEnable: true
@@ -272,7 +388,7 @@ const ContentMenuItems = {
                     action: ContextMenuActionType.search,
                     title: 'Google 圖片',
                     url: 'https://www.google.com/images?q=${search}',
-                    iconUrl: 'https://api.faviconkit.com/www.google.com/64',
+                    iconUrl: 'https://www.google.com/favicon.ico',
                     isEnable: true
                 },
                 {
@@ -319,15 +435,15 @@ const ContentMenuItems = {
                     url: 'https://www.startpage.com/sp/search?query=${search}&cat=images&pl=opensearch&language=english',
                     iconUrl: 'https://www.startpage.com/sp/cdn/favicons/apple-touch-icon-57x57--default.png',
                     isEnable: true
-                },,
+                },
                 {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
                     title: 'Yandex 圖片',
-                    url: 'https://yandex.com/images/search?text=images',
+                    url: 'https://yandex.eu/images/search?text=${search}',
                     iconUrl: 'https://yastatic.net/images-thumbs/_/8cS_MbHl6VBweqVjWeI-eNy0tzE.ico',
-                    isEnable: false
+                    isEnable: true
                 }
             ],
             isEnable: true
@@ -344,6 +460,15 @@ const ContentMenuItems = {
                     title: 'YouTube',
                     url: 'https://www.youtube.com/results?search_query=${search}',
                     iconUrl: 'https://www.youtube.com/s/desktop/f2388c5e/img/favicon.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Invidious (YouTube)',
+                    url: 'https://invidious.nerdvpn.de/search?q=${search}',
+                    iconUrl: 'https://invidious.nerdvpn.de/favicon-32x32.png?v=831017f4',
                     isEnable: true
                 },
                 {
@@ -368,7 +493,7 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Ofiii',
+                    title: 'ofiii',
                     url: 'https://www.ofiii.com/search/${search}',
                     iconUrl: 'https://www.ofiii.com/favicon.ico',
                     isEnable: true
@@ -380,6 +505,15 @@ const ContentMenuItems = {
                     title: 'BiliBili',
                     url: 'https://search.bilibili.com/all?keyword=${search}',
                     iconUrl: 'https://www.bilibili.com/favicon.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Hami Video',
+                    url: 'https://hamivideo.hinet.net/hamivideo/search.do?keyword=${search}',
+                    iconUrl: 'https://hamivideo.hinet.net/hamivideo/favicon_hamivideo_new.ico',
                     isEnable: true
                 },
                 {
@@ -421,15 +555,6 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: '巴哈姆特',
-                    url: 'https://acg.gamer.com.tw/search.php?kw=${search}',
-                    iconUrl: 'https://api.faviconkit.com/ani.gamer.com.tw/64',
-                    isEnable: true
-                },
-                {
-                    itemType: ContextMenuItemType.normal,
-                    contentType: ContextMenuType.selection,
-                    action: ContextMenuActionType.search,
                     title: 'Google 地圖',
                     url: 'https://maps.google.com/maps?q=${search}',
                     iconUrl: 'https://www.google.com/images/branding/product/ico/maps_32dp.ico',
@@ -451,6 +576,15 @@ const ContentMenuItems = {
                     title: 'DuckDuckGo 地圖',
                     url: 'https://duckduckgo.com/?t=h_&q=${search}&ia=web&iaxm=maps&iax=images',
                     iconUrl: 'https://duckduckgo.com/favicon.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'OpenStreetMap',
+                    url: 'https://www.openstreetmap.org/search?query=${search}',
+                    iconUrl: 'https://www.openstreetmap.org/assets/apple-touch-icon-60x60-cff74c9066d8e7fd08b29407712edbae5613cc9a4c03ee0398a89502a6a41d1f.png',
                     isEnable: true
                 },
                 {
@@ -519,10 +653,9 @@ const ContentMenuItems = {
             action: ContextMenuActionType.search,
             title: 'Google 快取頁面',
             url: 'https://webcache.googleusercontent.com/search?q=cache:${url}',
-            iconUrl: 'https://api.faviconkit.com/www.google.com/64',
-            isEnable: true
+            iconUrl: 'https://www.google.com/favicon.ico',
+            isEnable: false
         },
-        
         {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.page,
@@ -532,7 +665,6 @@ const ContentMenuItems = {
             iconUrl: 'https://papago.naver.com/favicon.ico',
             isEnable: false
         },
-
         {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.page,
@@ -541,7 +673,6 @@ const ContentMenuItems = {
             url: '${url}',
             isEnable: true
         },
-        
         {
             itemType: ContextMenuItemType.separator,
             contentType: ContextMenuType.page,
@@ -612,10 +743,9 @@ const ContentMenuItems = {
             action: ContextMenuActionType.search,
             title: 'Google 快取頁面',
             url: 'https://webcache.googleusercontent.com/search?q=cache:${url}',
-            iconUrl: 'https://api.faviconkit.com/www.google.com/64',
-            isEnable: true
+            iconUrl: 'https://www.google.com/favicon.ico',
+            isEnable: false
         },
-
         {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.page,
@@ -625,7 +755,6 @@ const ContentMenuItems = {
             iconUrl: 'https://papago.naver.com/favicon.ico',
             isEnable: false
         },
-        
         {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.link,
@@ -664,15 +793,6 @@ const ContentMenuItems = {
                     url: 'https://www.urlvoid.com/scan/${domain}',
                     iconUrl: 'https://www.urlvoid.com/favicon.ico',
                     isEnable: true
-                },
-                {
-                    itemType: ContextMenuItemType.normal,
-                    contentType: ContextMenuType.link,
-                    action: ContextMenuActionType.search,
-                    title: 'Urivoid',
-                    url: 'https://www.urlvoid.com/scan/${domain}',
-                    iconUrl: 'https://www.urlvoid.com/favicon.ico',
-                    isEnable: true
                 }
             ],
             isEnable: true
@@ -694,7 +814,7 @@ const ContentMenuItems = {
             action: ContextMenuActionType.search,
             title: 'Google 圖片',
             url: 'https://images.google.com/searchbyimage?sbisrc=cr_1_5_2&image_url=${url}',
-            iconUrl: 'https://api.faviconkit.com/www.google.com/64',
+            iconUrl: 'https://www.google.com/favicon.ico',
             isEnable: true
         },
         {
@@ -703,7 +823,7 @@ const ContentMenuItems = {
             action: ContextMenuActionType.googleImageReverseSearch,
             title: 'Google 圖片',
             url: '',
-            iconUrl: 'https://api.faviconkit.com/www.google.com/64',
+            iconUrl: 'https://www.google.com/favicon.ico',
             isEnable: false
         },
         {
@@ -712,7 +832,7 @@ const ContentMenuItems = {
             action: ContextMenuActionType.search,
             title: 'Google Lens 圖片',
             url: 'https://lens.google.com/uploadbyurl?url=${url}',
-            iconUrl: 'https://api.faviconkit.com/www.google.com/64',
+            iconUrl: 'https://ssl.gstatic.com/lens/web/ui/icons/favicon-32x32.png',
             isEnable: true
         },
         {
@@ -728,18 +848,45 @@ const ContentMenuItems = {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.image,
             action: ContextMenuActionType.search,
-            title: 'TinEye 圖片',
-            url: 'https://www.tineye.com/search?url=${url}',
-            iconUrl: 'https://tineye.com/favicon.ico',
+            title: 'Yandex 圖片',
+            url: 'https://yandex.eu/images/search?rpt=imageview&url=${url}',
+            iconUrl: 'https://yastatic.net/images-thumbs/_/8cS_MbHl6VBweqVjWeI-eNy0tzE.ico',
             isEnable: true
         },
         {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.image,
             action: ContextMenuActionType.search,
-            title: 'Yandex 圖片',
-            url: 'https://yandex.com/images/search?rpt=imageview&url=${url}',
-            iconUrl: 'https://yastatic.net/images-thumbs/_/8cS_MbHl6VBweqVjWeI-eNy0tzE.ico',
+            title: 'Lenso AI',
+            url: 'https://lenso.ai/en/search-by-url?url=${url}&utm_source=sbi',
+            iconUrl: 'https://lenso.ai/apple-touch-icon.png',
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.normal,
+            contentType: ContextMenuType.image,
+            action: ContextMenuActionType.search,
+            title: 'Anime Scene Search',
+            url: 'https://trace.moe/?url=${url}',
+            iconUrl: 'https://trace.moe/favicon.png',
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.normal,
+            contentType: ContextMenuType.image,
+            action: ContextMenuActionType.search,
+            title: '二次元圖片搜尋',
+            url: 'https://ascii2d.net/search/url/${url}',
+            iconUrl: 'https://ascii2d.net/assets/favicon-461e7af86f6c1a73f716cf8c729e65d6164851b66470932d01ef928ebbaed6ba.ico',
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.normal,
+            contentType: ContextMenuType.image,
+            action: ContextMenuActionType.search,
+            title: 'TinEye 圖片',
+            url: 'https://www.tineye.com/search?url=${url}',
+            iconUrl: 'https://tineye.com/favicon.ico',
             isEnable: true
         },
         {
@@ -748,7 +895,7 @@ const ContentMenuItems = {
             action: '',
             title: '',
             url: '',
-            isEnable: true
+            isEnable: false
         },
         {
             itemType: ContextMenuItemType.folder,
@@ -757,7 +904,7 @@ const ContentMenuItems = {
             command: '',
             title: '圖片工具',
             url: '',
-            isEnable: true,
+            isEnable: false,
             items: [
                 {
                     itemType: ContextMenuItemType.normal,
@@ -766,7 +913,7 @@ const ContentMenuItems = {
                     command: ImageBase64ConvertActionCommandType.open,
                     title: '在新分頁開啟圖片 (Data URI)',
                     url: '',
-                    isEnable: true
+                    isEnable: false
                 },
                 {
                     itemType: ContextMenuItemType.normal,
@@ -775,7 +922,7 @@ const ContentMenuItems = {
                     command: ImageBase64ConvertActionCommandType.copy,
                     title: '複製圖片的 Data URI',
                     url: '',
-                    isEnable: true
+                    isEnable: false
                 },
                 {
                     itemType: ContextMenuItemType.normal,
@@ -784,7 +931,7 @@ const ContentMenuItems = {
                     command: ImageBase64ConvertActionCommandType.download,
                     title: '下載圖片',
                     url: '',
-                    isEnable: true
+                    isEnable: false
                 }
             ]
         }
@@ -795,7 +942,7 @@ const ContentMenuItems = {
             itemType: ContextMenuItemType.normal,
             contentType: ContextMenuType.audio,
             action: ContextMenuActionType.search,
-            title: '在新分頁開啟音頻',
+            title: '在新分頁開啟音樂',
             url: '',
             isEnable: true
         }
