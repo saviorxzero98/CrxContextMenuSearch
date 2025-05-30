@@ -156,6 +156,15 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
+                    title: 'Compilot',
+                    url: 'https://copilot.microsoft.com/?sendquery=1&showconv=1&q=${search}',
+                    iconUrl: 'https://copilot.microsoft.com/sa/simg/favicon-cplt.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
                     title: 'Claude AI',
                     url: 'https://claude.ai/new?q=${search}',
                     iconUrl: 'https://claude.ai/images/claude_app_icon.png',
@@ -229,7 +238,7 @@ const ContentMenuItems = {
         {
             itemType: ContextMenuItemType.folder,
             contentType: ContextMenuType.selection,
-            title: '翻譯',
+            title: '翻譯 (轉中文)',
             items: [
                 {
                     itemType: ContextMenuItemType.normal,
@@ -262,20 +271,46 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Bing 翻譯 (中文)',
-                    url: 'https://www.bing.com/translator/?to=zh-Hant&text=${search}',
-                    iconUrl: 'https://www.bing.com/th?id=OTT.7A274AA188550691D09FA80F322A58D2&pid=Trans',
+                    title: 'Papago 翻譯 (中文)',
+                    url: 'https://papago.naver.com/?sk=auto&tk=zh-TW&st=${search}',
+                    iconUrl: 'https://papago.naver.com/favicon.ico',
                     isEnable: true
                 },
                 {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Papago 翻譯 (中文)',
-                    url: 'https://papago.naver.com/?sk=auto&tk=zh-TW&st=${search}',
-                    iconUrl: 'https://papago.naver.com/favicon.ico',
+                    title: 'iTranslate (中文)',
+                    url: 'https://itranslate.com/translate/detect-language-to-chinese-traditional/${search}',
+                    iconUrl: 'https://itranslate.com/images/favicon.png',
                     isEnable: true
                 },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Compilot (中文)',
+                    url: 'https://copilot.microsoft.com/?sendquery=1&showconv=1&q=將這一句翻譯成繁體中文 "${search}"',
+                    iconUrl: 'https://copilot.microsoft.com/sa/simg/favicon-cplt.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Bing 翻譯 (中文)',
+                    url: 'https://www.bing.com/translator/?to=zh-Hant&text=${search}',
+                    iconUrl: 'https://www.bing.com/th?id=OTT.7A274AA188550691D09FA80F322A58D2&pid=Trans',
+                    isEnable: true
+                }
+            ],
+            isEnable: true
+        },
+        {
+            itemType: ContextMenuItemType.folder,
+            contentType: ContextMenuType.selection,
+            title: '翻譯 (轉英文)',
+            items: [
                 {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
@@ -307,18 +342,36 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Bing 翻譯 (英文)',
-                    url: 'https://www.bing.com/translator/?to=en&text=${search}',
-                    iconUrl: 'https://www.bing.com/th?id=OTT.7A274AA188550691D09FA80F322A58D2&pid=Trans',
+                    title: 'Papago 翻譯 (英文)',
+                    url: 'https://papago.naver.com/?sk=auto&tk=en&st=${search}',
+                    iconUrl: 'https://papago.naver.com/favicon.ico',
                     isEnable: true
                 },
                 {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Papago 翻譯 (英文)',
-                    url: 'https://papago.naver.com/?sk=auto&tk=en&st=${search}',
-                    iconUrl: 'https://papago.naver.com/favicon.ico',
+                    title: 'iTranslate (英文)',
+                    url: 'https://itranslate.com/translate/detect-language-to-english-united-states/${search}',
+                    iconUrl: 'https://itranslate.com/images/favicon.png',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Compilot (英文)',
+                    url: 'https://copilot.microsoft.com/?sendquery=1&showconv=1&q=將這一句翻譯成英文 "${search}"',
+                    iconUrl: 'https://copilot.microsoft.com/sa/simg/favicon-cplt.ico',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'Bing 翻譯 (英文)',
+                    url: 'https://www.bing.com/translator/?to=en&text=${search}',
+                    iconUrl: 'https://www.bing.com/th?id=OTT.7A274AA188550691D09FA80F322A58D2&pid=Trans',
                     isEnable: true
                 },
                 {
@@ -372,7 +425,7 @@ const ContentMenuItems = {
                     title: 'Dr.Eye譯典通',
                     url: 'https://www.dreye.com/ews/${search}--01--.html',
                     iconUrl: 'https://www.dreye.com/favicon.ico',
-                    isEnable: true
+                    isEnable: false
                 }
             ],
             isEnable: true
@@ -511,18 +564,9 @@ const ContentMenuItems = {
                     itemType: ContextMenuItemType.normal,
                     contentType: ContextMenuType.selection,
                     action: ContextMenuActionType.search,
-                    title: 'Hami Video',
+                    title: 'Hami 影音',
                     url: 'https://hamivideo.hinet.net/hamivideo/search.do?keyword=${search}',
                     iconUrl: 'https://hamivideo.hinet.net/hamivideo/favicon_hamivideo_new.ico',
-                    isEnable: true
-                },
-                {
-                    itemType: ContextMenuItemType.normal,
-                    contentType: ContextMenuType.selection,
-                    action: ContextMenuActionType.search,
-                    title: 'SoundCloud',
-                    url: 'https://soundcloud.com/search?q=${search}',
-                    iconUrl: 'https://a-v2.sndcdn.com/assets/images/sc-icons/favicon-2cadd14bdb.ico',
                     isEnable: true
                 },
                 {
@@ -532,6 +576,15 @@ const ContentMenuItems = {
                     title: 'YouTube Music',
                     url: 'https://music.youtube.com/search?q=${search}',
                     iconUrl: 'https://music.youtube.com/img/favicon_32.png',
+                    isEnable: true
+                },
+                {
+                    itemType: ContextMenuItemType.normal,
+                    contentType: ContextMenuType.selection,
+                    action: ContextMenuActionType.search,
+                    title: 'SoundCloud',
+                    url: 'https://soundcloud.com/search?q=${search}',
+                    iconUrl: 'https://a-v2.sndcdn.com/assets/images/sc-icons/favicon-2cadd14bdb.ico',
                     isEnable: true
                 },
                 {
